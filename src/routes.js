@@ -22,7 +22,7 @@ import Maps from "views/admin/Maps.js";
 import Register from "views/admin/Register.js";
 import Login from "views/admin/Login.js";
 import Tables from "views/admin/Tables.js";
-import Icons from "views/admin/Icons.js";
+import Classes from "views/admin/Classes.js";
 
 var routes = [
   {
@@ -33,10 +33,10 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/icons",
-    name: "Icons",
+    path: "/classes",
+    name: "Classes",
     icon: "ni ni-planet text-blue",
-    component: <Icons />,
+    component: <Classes />,
     layout: "/admin",
   },
   {
