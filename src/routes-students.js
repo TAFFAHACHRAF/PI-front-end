@@ -16,13 +16,13 @@
 
 */
 
-import Index from "views/Index.js";
-import Profile from "views/admin/Profile.js";
-import Maps from "views/admin/Maps.js";
-import Register from "views/admin/Register.js";
-import Login from "views/admin/Login.js";
-import Tables from "views/admin/Tables.js";
-import Icons from "views/admin/Icons.js";
+import Index from "views/student/Index.js";
+import Profile from "views/student/Profile.js";
+import Account from "views/student/Account.js";
+import Register from "views/student/Register.js";
+import Login from "views/student/Login.js";
+import Payment from "views/student/Payment.js";
+import Icons from "views/student/History.js";
 
 var routes = [
   {
@@ -30,35 +30,35 @@ var routes = [
     name: "Dashboard",
     icon: "ni ni-tv-2 text-primary",
     component: <Index />,
-    layout: "/admin",
+    layout: "/student",
   },
   {
-    path: "/icons",
-    name: "Icons",
+    path: "/history",
+    name: "hisotry",
     icon: "ni ni-planet text-blue",
     component: <Icons />,
-    layout: "/admin",
+    layout: "/student",
   },
   {
-    path: "/maps",
-    name: "Maps",
+    path: "/account",
+    name: "Account",
     icon: "ni ni-pin-3 text-orange",
-    component: <Maps />,
-    layout: "/admin",
+    component: <Account />,
+    layout: "/student",
   },
   {
     path: "/user-profile",
     name: "User Profile",
     icon: "ni ni-single-02 text-yellow",
     component: <Profile />,
-    layout: "/admin",
+    layout: "/student",
   },
   {
-    path: "/tables",
-    name: "Tables",
+    path: "/payment",
+    name: "Payment",
     icon: "ni ni-bullet-list-67 text-red",
-    component: <Tables />,
-    layout: "/admin",
+    component: <Payment />,
+    layout: "/student",
   },
   {
     path: "/login",
@@ -73,6 +73,7 @@ var routes = [
     icon: "ni ni-circle-08 text-pink",
     component: <Register />,
     layout: "/auth",
-  }
+  },
 ];
+
 export default routes;
