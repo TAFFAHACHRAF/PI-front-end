@@ -23,6 +23,10 @@ import Register from "views/admin/Register.js";
 import Login from "views/admin/Login.js";
 import Tables from "views/admin/Tables.js";
 import Classes from "views/admin/Classes.js";
+import BillExchange from "views/admin/BillExchange";
+import BillExchangeDetails from "views/admin/BillExchangeDetails";
+import StudentData from "views/admin/StudentData";
+import Diploma from "views/admin/Diploma";
 
 var routes = [
   {
@@ -47,6 +51,20 @@ var routes = [
     layout: "/admin",
   },
   {
+    path: "/bill-exchange",
+    name: "Bill Exchange",
+    icon: "ni ni-pin-3 text-orange",
+    component: <BillExchange />,
+    layout: "/admin",
+  },
+  {
+    path: "/billexhangedetails",
+    name: "exchange details",
+    icon: "ni ni-pin-3 text-orange",
+    component: <BillExchangeDetails />,
+    layout: "/admin",
+  },
+  {
     path: "/user-profile",
     name: "User Profile",
     icon: "ni ni-single-02 text-yellow",
@@ -58,6 +76,20 @@ var routes = [
     name: "Tables",
     icon: "ni ni-bullet-list-67 text-red",
     component: <Tables />,
+    layout: "/admin",
+  },
+  {
+    path: "/studentData",
+    name: "StudentData",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: <StudentData />,
+    layout: "/admin",
+  },
+  {
+    path: "/diploma",
+    name: "Diplima",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: <Diploma />,
     layout: "/admin",
   },
   {

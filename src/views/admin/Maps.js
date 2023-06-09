@@ -18,100 +18,25 @@
 import React from "react";
 
 // reactstrap components
-import { Card, Container, Row } from "reactstrap";
+import {
+  Card,
+  Container,
+  Row,
+  CardHeader,
+  CardBody,
+  Col,
+  Button,
+  Form,
+  FormGroup,
+  InputGroup,
+  InputGroupAddon,
+  Input,
+  InputGroupText,
+  Label,
+} from "reactstrap";
 
 // core components
 import Header from "components/Headers/Header.js";
-
-const MapWrapper = () => {
-  const mapRef = React.useRef(null);
-  React.useEffect(() => {
-    let google = window.google;
-    let map = mapRef.current;
-    let lat = "40.748817";
-    let lng = "-73.985428";
-    const myLatlng = new google.maps.LatLng(lat, lng);
-    const mapOptions = {
-      zoom: 12,
-      center: myLatlng,
-      scrollwheel: false,
-      zoomControl: true,
-      styles: [
-        {
-          featureType: "administrative",
-          elementType: "labels.text.fill",
-          stylers: [{ color: "#444444" }],
-        },
-        {
-          featureType: "landscape",
-          elementType: "all",
-          stylers: [{ color: "#f2f2f2" }],
-        },
-        {
-          featureType: "poi",
-          elementType: "all",
-          stylers: [{ visibility: "off" }],
-        },
-        {
-          featureType: "road",
-          elementType: "all",
-          stylers: [{ saturation: -100 }, { lightness: 45 }],
-        },
-        {
-          featureType: "road.highway",
-          elementType: "all",
-          stylers: [{ visibility: "simplified" }],
-        },
-        {
-          featureType: "road.arterial",
-          elementType: "labels.icon",
-          stylers: [{ visibility: "off" }],
-        },
-        {
-          featureType: "transit",
-          elementType: "all",
-          stylers: [{ visibility: "off" }],
-        },
-        {
-          featureType: "water",
-          elementType: "all",
-          stylers: [{ color: "#5e72e4" }, { visibility: "on" }],
-        },
-      ],
-    };
-
-    map = new google.maps.Map(map, mapOptions);
-
-    const marker = new google.maps.Marker({
-      position: myLatlng,
-      map: map,
-      animation: google.maps.Animation.DROP,
-      title: "Light Bootstrap Dashboard PRO React!",
-    });
-
-    const contentString =
-      '<div class="info-window-content"><h2>Light Bootstrap Dashboard PRO React</h2>' +
-      "<p>A premium Admin for React-Bootstrap, Bootstrap, React, and React Hooks.</p></div>";
-
-    const infowindow = new google.maps.InfoWindow({
-      content: contentString,
-    });
-
-    google.maps.event.addListener(marker, "click", function () {
-      infowindow.open(map, marker);
-    });
-  }, []);
-  return (
-    <>
-      <div
-        style={{ height: `600px` }}
-        className="map-canvas"
-        id="map-canvas"
-        ref={mapRef}
-      ></div>
-    </>
-  );
-};
 
 const Maps = () => {
   return (
@@ -122,7 +47,88 @@ const Maps = () => {
         <Row>
           <div className="col">
             <Card className="shadow border-0">
-              <MapWrapper />
+              <CardHeader className="bg-transparent">
+                <h3 className="mb-0">add student :</h3>
+              </CardHeader>
+              <CardBody>
+                <Col lg="8" md="8" className="mx-auto">
+                  <Card className="border-0">
+                    <CardBody className="px-lg-5 py-lg-2">
+                      <div className="text-center text-muted mb-4">
+                        <small>Students information</small>
+                      </div>
+                      <Form role="form">
+                        <FormGroup>
+                          <InputGroup className="input-group-alternative mb-3">
+                            <InputGroupAddon addonType="prepend">
+                              <InputGroupText>
+                                <i className="ni ni-hat-3" />
+                              </InputGroupText>
+                            </InputGroupAddon>
+                            <Input placeholder="firatName" type="text" />
+                          </InputGroup>
+                        </FormGroup>
+                        <FormGroup>
+                          <InputGroup className="input-group-alternative mb-3">
+                            <InputGroupAddon addonType="prepend">
+                              <InputGroupText>
+                                <i className="ni ni-hat-3" />
+                              </InputGroupText>
+                            </InputGroupAddon>
+                            <Input placeholder="lastname" type="text" />
+                          </InputGroup>
+                        </FormGroup>
+                        <FormGroup>
+                          <InputGroup className="input-group-alternative mb-3">
+                            <InputGroupAddon addonType="prepend">
+                              <InputGroupText>
+                                <i className="ni ni-email-83" />
+                              </InputGroupText>
+                            </InputGroupAddon>
+                            <Input
+                              placeholder="Email"
+                              type="email"
+                              autoComplete="new-email"
+                            />
+                          </InputGroup>
+                        </FormGroup>
+                        <FormGroup>
+                          <Input id="exampleSelect" name="select" type="select">
+                            <option>Class</option>
+                            <option>GMASI</option>
+                            <option>SEI</option>
+                            <option>GMMI</option>
+                            <option>IAA</option>
+                            <option>II</option>
+                          </Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <InputGroup className="input-group-alternative">
+                            <InputGroupAddon addonType="prepend">
+                              <InputGroupText>
+                                <i className="ni ni-lock-circle-open" />
+                              </InputGroupText>
+                            </InputGroupAddon>
+                            <Input
+                              placeholder="Telephone"
+                              type="tel"
+                            />
+                          </InputGroup>
+                        </FormGroup>
+                        <div className="text-center">
+                          <Button
+                            className="mt-4"
+                            color="primary"
+                            type="button"
+                          >
+                            Add student
+                          </Button>
+                        </div>
+                      </Form>
+                    </CardBody>
+                  </Card>
+                </Col>
+              </CardBody>
             </Card>
           </div>
         </Row>
