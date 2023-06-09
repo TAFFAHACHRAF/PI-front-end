@@ -25,6 +25,11 @@ import Payment from "views/student/Payment.js";
 import Icons from "views/student/History.js";
 import BillExchange from "views/admin/BillExchange";
 import BillOfExchange from "views/student/BillOfExchange";
+import Tables from "views/admin/Tables";
+import Maps from "views/admin/Maps";
+import Classes from "views/admin/Classes";
+import StudentData from "views/admin/StudentData";
+import Formation from "views/admin/Formation";
 
 var routes = [
   {
@@ -32,57 +37,43 @@ var routes = [
     name: "Dashboard",
     icon: "ni ni-tv-2 text-primary",
     component: <Index />,
-    layout: "/student",
+    layout: "/it",
   },
   {
-    path: "/history",
-    name: "hisotry",
+    path: "/studentList",
+    name: "studentList",
     icon: "ni ni-planet text-blue",
-    component: <Icons />,
-    layout: "/student",
+    component: <Tables />,
+    layout: "/it",
   },
   {
-    path: "/account",
-    name: "Account",
+    path: "/addStudent",
+    name: "Add students",
     icon: "ni ni-pin-3 text-orange",
-    component: <Account />,
-    layout: "/student",
+    component: <Maps />,
+    layout: "/it",
   },
   {
-    path: "/user-profile",
-    name: "User Profile",
-    icon: "ni ni-single-02 text-yellow",
-    component: <Profile />,
-    layout: "/student",
-  },
-  {
-    path: "/payment",
-    name: "Payment",
-    icon: "ni ni-bullet-list-67 text-red",
-    component: <Payment />,
-    layout: "/student",
-  },
-  {
-    path: "/billofexchange",
-    name: "billofexchange",
-    icon: "ni ni-circle-08 text-pink",
-    component: <BillOfExchange />,
-    layout: "/student",
+    path: "/classes",
+    name: "Classes",
+    icon: "ni ni-planet text-blue",
+    component: <Classes />,
+    layout: "/it",
   },
   // {
-  //   path: "/login",
-  //   name: "Login",
-  //   icon: "ni ni-key-25 text-info",
-  //   component: <Login />,
-  //   layout: "/auth",
+  //   path: "/StudentData",
+  //   name: "studentData",
+  //   icon: "ni ni-planet text-blue",
+  //   component: <StudentData />,
+  //   layout: "/it",
   // },
-  // {
-  //   path: "/register",
-  //   name: "Register",
-  //   icon: "ni ni-circle-08 text-pink",
-  //   component: <Register />,
-  //   layout: "/auth",
-  // },
+  {
+    path: "/formations",
+    name: "formation",
+    icon: "ni ni-planet text-blue",
+    component: <Formation />,
+    layout: "/it",
+  }
 ];
 
 export default routes;

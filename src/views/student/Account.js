@@ -71,7 +71,7 @@ const Maps = () => {
                         backgroundRepeat: "no-repeat",
                         backgroundSize: "cover",
                         height: "100%",
-                        width: "80%",
+                        width: "100%",
                         margin: "0 auto",
                       }}
                     >
@@ -150,8 +150,8 @@ const Maps = () => {
                                           >
                                             Balance
                                           </CardTitle>
-                                          <span className="h3 font-weight-bold mb-0">
-                                            15.0000,00 DHs
+                                          <span className="h5 font-weight-bold mb-0">
+                                            15.0000 DHs
                                           </span>
                                         </div>
                                         <Col className="col-auto">
@@ -174,7 +174,7 @@ const Maps = () => {
                                           >
                                             Credit
                                           </CardTitle>
-                                          <span className="h3 font-weight-bold mb-0">
+                                          <span className="h5 font-weight-bold mb-0">
                                             3000.00 DHs
                                           </span>
                                         </div>
@@ -198,7 +198,7 @@ const Maps = () => {
                                           >
                                             Due Date
                                           </CardTitle>
-                                          <span className="h3 font-weight-bold mb-0">
+                                          <span className="h5 font-weight-bold mb-0">
                                             14/05/2023
                                           </span>
                                         </div>
@@ -222,7 +222,7 @@ const Maps = () => {
                                           >
                                             Paid Tuition
                                           </CardTitle>
-                                          <span className="h3 font-weight-bold mb-0">
+                                          <span className="h5 font-weight-bold mb-0">
                                             5000.00 DHs
                                           </span>
                                         </div>

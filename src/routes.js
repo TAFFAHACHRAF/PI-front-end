@@ -27,6 +27,7 @@ import BillExchange from "views/admin/BillExchange";
 import BillExchangeDetails from "views/admin/BillExchangeDetails";
 import StudentData from "views/admin/StudentData";
 import Diploma from "views/admin/Diploma";
+import Formation from "views/admin/Formation";
 
 var routes = [
   {
@@ -44,8 +45,8 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/maps",
-    name: "Maps",
+    path: "/addStudent",
+    name: "Add students",
     icon: "ni ni-pin-3 text-orange",
     component: <Maps />,
     layout: "/admin",
@@ -72,8 +73,8 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/tables",
-    name: "Tables",
+    path: "/sutdentsList",
+    name: "SutdentsList",
     icon: "ni ni-bullet-list-67 text-red",
     component: <Tables />,
     layout: "/admin",
@@ -90,6 +91,13 @@ var routes = [
     name: "Diplima",
     icon: "ni ni-bullet-list-67 text-red",
     component: <Diploma />,
+    layout: "/admin",
+  },
+  {
+    path: "/formation",
+    name: "Formation",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: <Formation />,
     layout: "/admin",
   },
   {
