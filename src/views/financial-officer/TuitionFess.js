@@ -30,12 +30,18 @@ import {
   Pagination,
   PaginationItem,
   PaginationLink,
-  Form, FormGroup, Input, Button
+  Form,
+  FormGroup,
+  Input,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup,
+  Button,
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
 
-const StudentData = () => {
+const TuitionFess = () => {
   return (
     <>
       <Header />
@@ -52,9 +58,17 @@ const StudentData = () => {
                   style={{
                     width: "60%",
                   }}
-                  className="d-flex justify-content-end"
+                  className="d-flex justify-content-between"
                 >
-                  <FormGroup className="mb-0 mr-3">
+                  <FormGroup className="mb-0">
+                    <Input id="exampleSelect" name="select" type="select">
+                      <option>Departement</option>
+                      <option>Bank transfer</option>
+                      <option>Bill of exchange</option>
+                      <option>Check</option>
+                    </Input>
+                  </FormGroup>
+                  <FormGroup className="mb-0">
                     <Input id="exampleSelect" name="select" type="select">
                       <option>Classes</option>
                       <option>Bank transfer</option>
@@ -71,7 +85,7 @@ const StudentData = () => {
               </CardHeader>
               <CardBody>
                 <Row className="icon-examples">
-                  <Col lg="6" md="6">
+                  <Col lg="6" md="6" className="mb-3">
                     <div
                       style={{ backgroundColor: "rgb(248, 249, 250)" }}
                       className="p-2 border border-2"
@@ -90,24 +104,13 @@ const StudentData = () => {
                         <small>2 ème année master en XXXXX</small>
                       </p>
                       <hr className="mt-0 mb-0" />
-                      <p className="text-center mt-2 mb-0">ID</p>
-                      <p
-                        style={{
-                          backgroundColor: "#dd9a63",
-                          width: "fit-content",
-                          padding: "2px 10px",
-                          borderRadius: "5px",
-                          color: "black",
-                          fontWeight: "500",
-                          margin: "0 auto",
-                        }}
-                      >
-                        123435
+                      <p className="text-center mt-2 mb-0">
+                        <b>12-09-2023</b>
                       </p>
-
-                      <div className="d-flex justify-content-between px-5 pt-4">
+                      <hr className="mt-0 mb-0" />
+                      <div className="d-flex justify-content-center flex-column align-items-center px-5 pt-4">
                         <div>
-                          <p className="mb-0">Tuition fees</p>
+                          <p className="mb-0">Paid amount</p>
                           <p
                             style={{
                               backgroundColor: "#505470",
@@ -121,17 +124,13 @@ const StudentData = () => {
                           </p>
                         </div>
                         <div>
-                          <p className="mb-0">Paid fees</p>
-                          <p
+                          <Button 
                             style={{
-                              backgroundColor: "#24c18f",
-                              color: "white",
-                              padding: "2px 10px",
-                              borderRadius: "5px",
+                              padding: "5px 40px"
                             }}
-                          >
-                            15,000.00 DHs
-                          </p>
+                            color="success" type="button">
+                            Check
+                          </Button>
                         </div>
                       </div>
                     </div>
@@ -155,24 +154,13 @@ const StudentData = () => {
                         <small>2 ème année master en XXXXX</small>
                       </p>
                       <hr className="mt-0 mb-0" />
-                      <p className="text-center mt-2 mb-0">ID</p>
-                      <p
-                        style={{
-                          backgroundColor: "#dd9a63",
-                          width: "fit-content",
-                          padding: "2px 10px",
-                          borderRadius: "5px",
-                          color: "black",
-                          fontWeight: "500",
-                          margin: "0 auto",
-                        }}
-                      >
-                        123435
+                      <p className="text-center mt-2 mb-0">
+                        <b>12-09-2023</b>
                       </p>
-
-                      <div className="d-flex justify-content-between px-5 pt-4">
+                      <hr className="mt-0 mb-0" />
+                      <div className="d-flex justify-content-center flex-column align-items-center px-5 pt-4">
                         <div>
-                          <p className="mb-0">Tuition fees</p>
+                          <p className="mb-0">Paid amount</p>
                           <p
                             style={{
                               backgroundColor: "#505470",
@@ -180,25 +168,19 @@ const StudentData = () => {
                               padding: "2px 10px",
                               borderRadius: "5px",
                               fontWeight: "500",
-                              fontWeight: "500",
                             }}
                           >
                             15,000.00 DHs
                           </p>
                         </div>
                         <div>
-                          <p className="mb-0">Paid fees</p>
-                          <p
+                          <Button 
                             style={{
-                              backgroundColor: "#24c18f",
-                              color: "white",
-                              padding: "2px 10px",
-                              borderRadius: "5px",
-                              fontWeight: "500",
+                              padding: "5px 40px"
                             }}
-                          >
-                            15,000.00 DHs
-                          </p>
+                            color="success" type="button">
+                            Check
+                          </Button>
                         </div>
                       </div>
                     </div>
@@ -222,24 +204,13 @@ const StudentData = () => {
                         <small>2 ème année master en XXXXX</small>
                       </p>
                       <hr className="mt-0 mb-0" />
-                      <p className="text-center mt-2 mb-0">ID</p>
-                      <p
-                        style={{
-                          backgroundColor: "#dd9a63",
-                          width: "fit-content",
-                          padding: "2px 10px",
-                          borderRadius: "5px",
-                          color: "black",
-                          fontWeight: "500",
-                          margin: "0 auto",
-                        }}
-                      >
-                        123435
+                      <p className="text-center mt-2 mb-0">
+                        <b>12-09-2023</b>
                       </p>
-
-                      <div className="d-flex justify-content-between px-5 pt-4">
+                      <hr className="mt-0 mb-0" />
+                      <div className="d-flex justify-content-center flex-column align-items-center px-5 pt-4">
                         <div>
-                          <p className="mb-0">Tuition fees</p>
+                          <p className="mb-0">Paid amount</p>
                           <p
                             style={{
                               backgroundColor: "#505470",
@@ -253,18 +224,13 @@ const StudentData = () => {
                           </p>
                         </div>
                         <div>
-                          <p className="mb-0">Paid fees</p>
-                          <p
+                          <Button 
                             style={{
-                              backgroundColor: "#24c18f",
-                              color: "white",
-                              padding: "2px 10px",
-                              borderRadius: "5px",
-                              fontWeight: "500",
+                              padding: "5px 40px"
                             }}
-                          >
-                            15,000.00 DHs
-                          </p>
+                            color="success" type="button">
+                            Check
+                          </Button>
                         </div>
                       </div>
                     </div>
@@ -288,24 +254,13 @@ const StudentData = () => {
                         <small>2 ème année master en XXXXX</small>
                       </p>
                       <hr className="mt-0 mb-0" />
-                      <p className="text-center mt-2 mb-0">ID</p>
-                      <p
-                        style={{
-                          backgroundColor: "#dd9a63",
-                          width: "fit-content",
-                          padding: "2px 10px",
-                          borderRadius: "5px",
-                          color: "black",
-                          fontWeight: "500",
-                          margin: "0 auto",
-                        }}
-                      >
-                        123435
+                      <p className="text-center mt-2 mb-0">
+                        <b>12-09-2023</b>
                       </p>
-
-                      <div className="d-flex justify-content-between px-5 pt-4">
+                      <hr className="mt-0 mb-0" />
+                      <div className="d-flex justify-content-center flex-column align-items-center px-5 pt-4">
                         <div>
-                          <p className="mb-0">Tuition fees</p>
+                          <p className="mb-0">Paid amount</p>
                           <p
                             style={{
                               backgroundColor: "#505470",
@@ -319,18 +274,13 @@ const StudentData = () => {
                           </p>
                         </div>
                         <div>
-                          <p className="mb-0">Paid fees</p>
-                          <p
+                          <Button 
                             style={{
-                              backgroundColor: "#24c18f",
-                              color: "white",
-                              padding: "2px 10px",
-                              borderRadius: "5px",
-                              fontWeight: "500",
+                              padding: "5px 40px"
                             }}
-                          >
-                            15,000.00 DHs
-                          </p>
+                            color="success" type="button">
+                            Check
+                          </Button>
                         </div>
                       </div>
                     </div>
@@ -354,24 +304,13 @@ const StudentData = () => {
                         <small>2 ème année master en XXXXX</small>
                       </p>
                       <hr className="mt-0 mb-0" />
-                      <p className="text-center mt-2 mb-0">ID</p>
-                      <p
-                        style={{
-                          backgroundColor: "#dd9a63",
-                          width: "fit-content",
-                          padding: "2px 10px",
-                          borderRadius: "5px",
-                          color: "black",
-                          fontWeight: "500",
-                          margin: "0 auto",
-                        }}
-                      >
-                        123435
+                      <p className="text-center mt-2 mb-0">
+                        <b>12-09-2023</b>
                       </p>
-
-                      <div className="d-flex justify-content-between px-5 pt-4">
+                      <hr className="mt-0 mb-0" />
+                      <div className="d-flex justify-content-center flex-column align-items-center px-5 pt-4">
                         <div>
-                          <p className="mb-0">Tuition fees</p>
+                          <p className="mb-0">Paid amount</p>
                           <p
                             style={{
                               backgroundColor: "#505470",
@@ -385,18 +324,13 @@ const StudentData = () => {
                           </p>
                         </div>
                         <div>
-                          <p className="mb-0">Paid fees</p>
-                          <p
+                          <Button 
                             style={{
-                              backgroundColor: "#24c18f",
-                              color: "white",
-                              padding: "2px 10px",
-                              borderRadius: "5px",
-                              fontWeight: "500",
+                              padding: "5px 40px"
                             }}
-                          >
-                            15,000.00 DHs
-                          </p>
+                            color="success" type="button">
+                            Check
+                          </Button>
                         </div>
                       </div>
                     </div>
@@ -420,24 +354,13 @@ const StudentData = () => {
                         <small>2 ème année master en XXXXX</small>
                       </p>
                       <hr className="mt-0 mb-0" />
-                      <p className="text-center mt-2 mb-0">ID</p>
-                      <p
-                        style={{
-                          backgroundColor: "#dd9a63",
-                          width: "fit-content",
-                          padding: "2px 10px",
-                          borderRadius: "5px",
-                          color: "black",
-                          fontWeight: "500",
-                          margin: "0 auto",
-                        }}
-                      >
-                        123435
+                      <p className="text-center mt-2 mb-0">
+                        <b>12-09-2023</b>
                       </p>
-
-                      <div className="d-flex justify-content-between px-5 pt-4">
+                      <hr className="mt-0 mb-0" />
+                      <div className="d-flex justify-content-center flex-column align-items-center px-5 pt-4">
                         <div>
-                          <p className="mb-0">Tuition fees</p>
+                          <p className="mb-0">Paid amount</p>
                           <p
                             style={{
                               backgroundColor: "#505470",
@@ -451,22 +374,18 @@ const StudentData = () => {
                           </p>
                         </div>
                         <div>
-                          <p className="mb-0">Paid fees</p>
-                          <p
+                          <Button 
                             style={{
-                              backgroundColor: "#24c18f",
-                              color: "white",
-                              padding: "2px 10px",
-                              borderRadius: "5px",
-                              fontWeight: "500",
+                              padding: "5px 40px"
                             }}
-                          >
-                            15,000.00 DHs
-                          </p>
+                            color="success" type="button">
+                            Check
+                          </Button>
                         </div>
                       </div>
                     </div>
                   </Col>
+                  
 
                   <CardFooter className="py-4 ml-auto">
                     <nav aria-label="...">
@@ -530,4 +449,4 @@ const StudentData = () => {
   );
 };
 
-export default StudentData;
+export default TuitionFess;

@@ -23,83 +23,65 @@ import Register from "views/admin/Register.js";
 import Login from "views/admin/Login.js";
 import Tables from "views/admin/Tables.js";
 import Classes from "views/admin/Classes.js";
-import BillExchange from "views/admin/BillExchange";
-import BillExchangeDetails from "views/admin/BillExchangeDetails";
 import StudentData from "views/admin/StudentData";
-import Diploma from "views/admin/Diploma";
-import Formation from "views/admin/Formation";
 
 var routes = [
-  {
-    path: "/index",
-    name: "Dashboard",
-    icon: "ni ni-tv-2 text-primary",
-    component: <Index />,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/index",
+  //   name: "Dashboard",
+  //   icon: "ni ni-tv-2 text-primary",
+  //   component: <Index />,
+  //   layout: "/admin",
+  // },
   {
     path: "/classes",
-    name: "Classes",
-    icon: "ni ni-planet text-blue",
+    name: "classes",
+    icon: "fa-solid fa-link text-blue",
     component: <Classes />,
     layout: "/admin",
   },
   {
     path: "/addStudent",
     name: "Add students",
-    icon: "ni ni-pin-3 text-orange",
+    icon: "fa-solid fa-plus text-orange",
     component: <Maps />,
     layout: "/admin",
   },
   {
-    path: "/bill-exchange",
-    name: "Bill Exchange",
-    icon: "ni ni-pin-3 text-orange",
-    component: <BillExchange />,
-    layout: "/admin",
-  },
-  {
-    path: "/billexhangedetails",
-    name: "exchange details",
-    icon: "ni ni-pin-3 text-orange",
-    component: <BillExchangeDetails />,
-    layout: "/admin",
-  },
-  {
     path: "/user-profile",
-    name: "User Profile",
-    icon: "ni ni-single-02 text-yellow",
+    name: "profile",
+    icon: "fa-regular fa-user text-yellow",
     component: <Profile />,
     layout: "/admin",
   },
   {
     path: "/sutdentsList",
     name: "SutdentsList",
-    icon: "ni ni-bullet-list-67 text-red",
+    icon: "fa-solid fa-list text-red",
     component: <Tables />,
     layout: "/admin",
   },
   {
     path: "/studentData",
-    name: "StudentData",
-    icon: "ni ni-bullet-list-67 text-red",
+    name: "Payment's Data",
+    icon: "fa-solid fa-server text-red",
     component: <StudentData />,
     layout: "/admin",
   },
-  {
-    path: "/diploma",
-    name: "Diplima",
-    icon: "ni ni-bullet-list-67 text-red",
-    component: <Diploma />,
-    layout: "/admin",
-  },
-  {
-    path: "/formation",
-    name: "Formation",
-    icon: "ni ni-bullet-list-67 text-red",
-    component: <Formation />,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/diploma",
+  //   name: "Diplima",
+  //   icon: "ni ni-bullet-list-67 text-red",
+  //   component: <Diploma />,
+  //   layout: "/admin",
+  // },
+  // {
+  //   path: "/formation",
+  //   name: "Formation",
+  //   icon: "ni ni-bullet-list-67 text-red",
+  //   component: <Formation />,
+  //   layout: "/admin",
+  // },
   {
     path: "/login",
     name: "Login",
@@ -113,6 +95,6 @@ var routes = [
     icon: "ni ni-circle-08 text-pink",
     component: <Register />,
     layout: "/auth",
-  }
+  },
 ];
 export default routes;

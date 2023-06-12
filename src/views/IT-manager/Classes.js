@@ -26,7 +26,7 @@ import {
   Container,
   Row,
   Col,
-  UncontrolledTooltip,
+  Button,
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
@@ -41,12 +41,15 @@ const Classes = () => {
         <Row>
           <div className="col-12">
             <Card className="shadow">
-              <CardHeader className="bg-transparent">
+              <CardHeader className="bg-transparent d-flex justify-content-between">
                 <h3 className="mb-0">Diplôme : Licence d'Université</h3>
+                <Button color="info">
+                  <i className="fas fa-plus" />
+                </Button>
               </CardHeader>
               <CardBody>
                 <Row className="icon-examples">
-                  <Col lg="6" md="6">
+                  <Col lg="6" md="6" className="position-relative">
                     <button
                       className="btn-icon-clipboard"
                       id="tooltip982655500"
@@ -68,10 +71,22 @@ const Classes = () => {
                           </small>
                         </p>
                       </div>
+                    </button>
+                    <button
+                      style={{
+                        position: "absolute",
+                        top: "10px",
+                        border:"none",
+                        backgroundColor: "transparent",
+                        padding: "3px 8px",
+                        right: "20px",
+                      }}
+                    >
+                      <i class="fa-solid fa-pen-to-square"></i>
                     </button>
                   </Col>
 
-                  <Col lg="6" md="6">
+                  <Col lg="6" md="6" className="position-relative">
                     <button
                       className="btn-icon-clipboard"
                       id="tooltip982655500"
@@ -93,10 +108,22 @@ const Classes = () => {
                           </small>
                         </p>
                       </div>
+                    </button>
+                    <button
+                      style={{
+                        position: "absolute",
+                        top: "10px",
+                        border:"none",
+                        backgroundColor: "transparent",
+                        padding: "3px 8px",
+                        right: "20px",
+                      }}
+                    >
+                      <i class="fa-solid fa-pen-to-square"></i>
                     </button>
                   </Col>
 
-                  <Col lg="6" md="6">
+                  <Col lg="6" md="6" className="position-relative">
                     <button
                       className="btn-icon-clipboard"
                       id="tooltip982655500"
@@ -118,10 +145,22 @@ const Classes = () => {
                           </small>
                         </p>
                       </div>
+                    </button>
+                    <button
+                      style={{
+                        position: "absolute",
+                        top: "10px",
+                        border:"none",
+                        backgroundColor: "transparent",
+                        padding: "3px 8px",
+                        right: "20px",
+                      }}
+                    >
+                      <i class="fa-solid fa-pen-to-square"></i>
                     </button>
                   </Col>
 
-                  <Col lg="6" md="6">
+                  <Col lg="6" md="6" className="position-relative">
                     <button
                       className="btn-icon-clipboard"
                       id="tooltip982655500"
@@ -143,10 +182,22 @@ const Classes = () => {
                           </small>
                         </p>
                       </div>
+                    </button>
+                    <button
+                      style={{
+                        position: "absolute",
+                        top: "10px",
+                        border:"none",
+                        backgroundColor: "transparent",
+                        padding: "3px 8px",
+                        right: "20px",
+                      }}
+                    >
+                      <i class="fa-solid fa-pen-to-square"></i>
                     </button>
                   </Col>
 
-                  <Col lg="6" md="6">
+                  <Col lg="6" md="6" className="position-relative">
                     <button
                       className="btn-icon-clipboard"
                       id="tooltip982655500"
@@ -168,10 +219,22 @@ const Classes = () => {
                           </small>
                         </p>
                       </div>
+                    </button>
+                    <button
+                      style={{
+                        position: "absolute",
+                        top: "10px",
+                        border:"none",
+                        backgroundColor: "transparent",
+                        padding: "3px 8px",
+                        right: "20px",
+                      }}
+                    >
+                      <i class="fa-solid fa-pen-to-square"></i>
                     </button>
                   </Col>
 
-                  <Col lg="6" md="6">
+                  <Col lg="6" md="6" className="position-relative">
                     <button
                       className="btn-icon-clipboard"
                       id="tooltip982655500"
@@ -193,10 +256,22 @@ const Classes = () => {
                           </small>
                         </p>
                       </div>
+                    </button>
+                    <button
+                      style={{
+                        position: "absolute",
+                        top: "10px",
+                        border:"none",
+                        backgroundColor: "transparent",
+                        padding: "3px 8px",
+                        right: "20px",
+                      }}
+                    >
+                      <i class="fa-solid fa-pen-to-square"></i>
                     </button>
                   </Col>
 
-                  <Col lg="6" md="6">
+                  <Col lg="6" md="6" className="position-relative">
                     <button
                       className="btn-icon-clipboard"
                       id="tooltip982655500"
@@ -219,82 +294,20 @@ const Classes = () => {
                         </p>
                       </div>
                     </button>
-                  </Col>
-
-                  <Col lg="6" md="6">
                     <button
-                      className="btn-icon-clipboard"
-                      id="tooltip982655500"
-                      type="button"
+                      style={{
+                        position: "absolute",
+                        top: "10px",
+                        border:"none",
+                        backgroundColor: "transparent",
+                        padding: "3px 8px",
+                        right: "20px",
+                      }}
                     >
-                      <div className="d-block">
-                        <p className="mb-0">
-                          <b>GRH</b> -{" "}
-                          <small>Gestion des Ressources Humaines</small>
-                        </p>
-                        <p className="mb-0">
-                          <b>Diplôme</b> : <small>Licence d'Université</small>
-                        </p>
-                        <p>
-                          <b>Département</b> :{" "}
-                          <small>
-                            Sciences et Techniques Administratives et Ingénierie
-                            des Compétences
-                          </small>
-                        </p>
-                      </div>
+                      <i class="fa-solid fa-pen-to-square"></i>
                     </button>
                   </Col>
-
-                  <Col lg="6" md="6">
-                    <button
-                      className="btn-icon-clipboard"
-                      id="tooltip982655500"
-                      type="button"
-                    >
-                      <div className="d-block">
-                        <p className="mb-0">
-                          <b>GRH</b> -{" "}
-                          <small>Gestion des Ressources Humaines</small>
-                        </p>
-                        <p className="mb-0">
-                          <b>Diplôme</b> : <small>Licence d'Université</small>
-                        </p>
-                        <p>
-                          <b>Département</b> :{" "}
-                          <small>
-                            Sciences et Techniques Administratives et Ingénierie
-                            des Compétences
-                          </small>
-                        </p>
-                      </div>
-                    </button>
-                  </Col>
-
-                  <Col lg="6" md="6">
-                    <button
-                      className="btn-icon-clipboard"
-                      id="tooltip982655500"
-                      type="button"
-                    >
-                      <div className="d-block">
-                        <p className="mb-0">
-                          <b>GRH</b> -{" "}
-                          <small>Gestion des Ressources Humaines</small>
-                        </p>
-                        <p className="mb-0">
-                          <b>Diplôme</b> : <small>Licence d'Université</small>
-                        </p>
-                        <p>
-                          <b>Département</b> :{" "}
-                          <small>
-                            Sciences et Techniques Administratives et Ingénierie
-                            des Compétences
-                          </small>
-                        </p>
-                      </div>
-                    </button>
-                  </Col>
+                
                 </Row>
               </CardBody>
             </Card>
@@ -316,16 +329,16 @@ const Classes = () => {
                       <div className="d-block">
                         <p className="mb-0">
                           <b>CGIF</b> -{" "}
-                          <small>Contrôle de Gestion et Ingénierie Financière</small>
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
                         </p>
                         <p className="mb-0">
                           <b>Diplôme</b> : <small>Master d'Université</small>
                         </p>
                         <p>
                           <b>Département</b> :{" "}
-                          <small>
-                            Génie Economie et Gestion
-                          </small>
+                          <small>Génie Economie et Gestion</small>
                         </p>
                       </div>
                     </button>
@@ -340,16 +353,16 @@ const Classes = () => {
                       <div className="d-block">
                         <p className="mb-0">
                           <b>CGIF</b> -{" "}
-                          <small>Contrôle de Gestion et Ingénierie Financière</small>
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
                         </p>
                         <p className="mb-0">
                           <b>Diplôme</b> : <small>Master d'Université</small>
                         </p>
                         <p>
                           <b>Département</b> :{" "}
-                          <small>
-                            Génie Economie et Gestion
-                          </small>
+                          <small>Génie Economie et Gestion</small>
                         </p>
                       </div>
                     </button>
@@ -364,16 +377,16 @@ const Classes = () => {
                       <div className="d-block">
                         <p className="mb-0">
                           <b>CGIF</b> -{" "}
-                          <small>Contrôle de Gestion et Ingénierie Financière</small>
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
                         </p>
                         <p className="mb-0">
                           <b>Diplôme</b> : <small>Master d'Université</small>
                         </p>
                         <p>
                           <b>Département</b> :{" "}
-                          <small>
-                            Génie Economie et Gestion
-                          </small>
+                          <small>Génie Economie et Gestion</small>
                         </p>
                       </div>
                     </button>
@@ -388,16 +401,16 @@ const Classes = () => {
                       <div className="d-block">
                         <p className="mb-0">
                           <b>CGIF</b> -{" "}
-                          <small>Contrôle de Gestion et Ingénierie Financière</small>
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
                         </p>
                         <p className="mb-0">
                           <b>Diplôme</b> : <small>Master d'Université</small>
                         </p>
                         <p>
                           <b>Département</b> :{" "}
-                          <small>
-                            Génie Economie et Gestion
-                          </small>
+                          <small>Génie Economie et Gestion</small>
                         </p>
                       </div>
                     </button>
@@ -412,16 +425,16 @@ const Classes = () => {
                       <div className="d-block">
                         <p className="mb-0">
                           <b>CGIF</b> -{" "}
-                          <small>Contrôle de Gestion et Ingénierie Financière</small>
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
                         </p>
                         <p className="mb-0">
                           <b>Diplôme</b> : <small>Master d'Université</small>
                         </p>
                         <p>
                           <b>Département</b> :{" "}
-                          <small>
-                            Génie Economie et Gestion
-                          </small>
+                          <small>Génie Economie et Gestion</small>
                         </p>
                       </div>
                     </button>
@@ -436,16 +449,16 @@ const Classes = () => {
                       <div className="d-block">
                         <p className="mb-0">
                           <b>CGIF</b> -{" "}
-                          <small>Contrôle de Gestion et Ingénierie Financière</small>
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
                         </p>
                         <p className="mb-0">
                           <b>Diplôme</b> : <small>Master d'Université</small>
                         </p>
                         <p>
                           <b>Département</b> :{" "}
-                          <small>
-                            Génie Economie et Gestion
-                          </small>
+                          <small>Génie Economie et Gestion</small>
                         </p>
                       </div>
                     </button>
@@ -460,16 +473,16 @@ const Classes = () => {
                       <div className="d-block">
                         <p className="mb-0">
                           <b>CGIF</b> -{" "}
-                          <small>Contrôle de Gestion et Ingénierie Financière</small>
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
                         </p>
                         <p className="mb-0">
                           <b>Diplôme</b> : <small>Master d'Université</small>
                         </p>
                         <p>
                           <b>Département</b> :{" "}
-                          <small>
-                            Génie Economie et Gestion
-                          </small>
+                          <small>Génie Economie et Gestion</small>
                         </p>
                       </div>
                     </button>
@@ -484,16 +497,16 @@ const Classes = () => {
                       <div className="d-block">
                         <p className="mb-0">
                           <b>CGIF</b> -{" "}
-                          <small>Contrôle de Gestion et Ingénierie Financière</small>
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
                         </p>
                         <p className="mb-0">
                           <b>Diplôme</b> : <small>Master d'Université</small>
                         </p>
                         <p>
                           <b>Département</b> :{" "}
-                          <small>
-                            Génie Economie et Gestion
-                          </small>
+                          <small>Génie Economie et Gestion</small>
                         </p>
                       </div>
                     </button>
@@ -508,16 +521,16 @@ const Classes = () => {
                       <div className="d-block">
                         <p className="mb-0">
                           <b>CGIF</b> -{" "}
-                          <small>Contrôle de Gestion et Ingénierie Financière</small>
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
                         </p>
                         <p className="mb-0">
                           <b>Diplôme</b> : <small>Master d'Université</small>
                         </p>
                         <p>
                           <b>Département</b> :{" "}
-                          <small>
-                            Génie Economie et Gestion
-                          </small>
+                          <small>Génie Economie et Gestion</small>
                         </p>
                       </div>
                     </button>
@@ -532,16 +545,16 @@ const Classes = () => {
                       <div className="d-block">
                         <p className="mb-0">
                           <b>CGIF</b> -{" "}
-                          <small>Contrôle de Gestion et Ingénierie Financière</small>
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
                         </p>
                         <p className="mb-0">
                           <b>Diplôme</b> : <small>Master d'Université</small>
                         </p>
                         <p>
                           <b>Département</b> :{" "}
-                          <small>
-                            Génie Economie et Gestion
-                          </small>
+                          <small>Génie Economie et Gestion</small>
                         </p>
                       </div>
                     </button>

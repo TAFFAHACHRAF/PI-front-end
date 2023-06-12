@@ -121,7 +121,7 @@ const Sidebar = (props) => {
             <img
               alt={logo.imgAlt}
               className="navbar-brand-img"
-              src={require("../../assets/img/brand/argon-react.png")}
+              src={logo.imgSrc}
             />
           </NavbarBrand>
         ) : null}

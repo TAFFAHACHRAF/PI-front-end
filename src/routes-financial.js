@@ -21,44 +21,66 @@ import Profile from "views/student/Profile.js";
 import Account from "views/student/Account.js";
 import Register from "views/student/Register.js";
 import Login from "views/student/Login.js";
-import Payment from "views/student/Payment.js";
+import Payment from "views/financial-officer/Payment.js";
 import Icons from "views/student/History.js";
-import BillExchange from "views/admin/BillExchange";
-import BillOfExchange from "views/student/BillOfExchange";
+import BillExchange from "views/financial-officer/BillExchange.js";
+import BillExchangeDetails from "views/financial-officer/BillExchangeDetails";
 import Tables from "views/admin/Tables";
 import Maps from "views/admin/Maps";
 import Classes from "views/admin/Classes";
 import StudentData from "views/admin/StudentData";
-import Diploma from "views/admin/Diploma";
+import Formation from "views/admin/Formation";
+import TuitionFess from "views/financial-officer/TuitionFess";
 
 var routes = [
-  {
-    path: "/index",
-    name: "Dashboard",
-    icon: "ni ni-tv-2 text-primary",
-    component: <Index />,
-    layout: "/director",
-  },
+  // {
+  //   path: "/index",
+  //   name: "Dashboard",
+  //   icon: "ni ni-tv-2 text-primary",
+  //   component: <Index />,
+  //   layout: "/financial",
+  // },
   {
     path: "/studentList",
     name: "studentList",
-    icon: "ni ni-planet text-blue",
+    icon: "a-sharp fa-solid fa-graduation-cap text-warning",
     component: <Tables />,
-    layout: "/director",
+    layout: "/financial",
   },
   {
     path: "/classes",
     name: "Classes",
-    icon: "ni ni-planet text-blue",
+    icon: "fa-solid fa-link text-blue",
     component: <Classes />,
-    layout: "/director",
+    layout: "/financial",
   },
   {
-    path: "/Diploma",
-    name: "studentData",
-    icon: "ni ni-planet text-blue",
-    component: <Diploma />,
-    layout: "/director",
+    path: "/bill-exchange",
+    name: "Bill Exchange",
+    icon: "fa-solid fa-money-bill text-orange",
+    component: <BillExchange />,
+    layout: "/financial",
+  },
+  {
+    path: "/billexhangedetails",
+    name: "exchange details",
+    icon: "fa-solid fa-circle-info text-success",
+    component: <BillExchangeDetails />,
+    layout: "/financial",
+  },
+  {
+    path: "/payment",
+    name: "Add payment",
+    icon: "fa-solid fa-plus text-blue",
+    component: <Payment />,
+    layout: "/financial",
+  },
+  {
+    path: "/Tuition fess",
+    name: "Tuition fess",
+    icon: "fa-solid fa-money-bill text-blue",
+    component: <TuitionFess />,
+    layout: "/financial",
   }
 ];
 

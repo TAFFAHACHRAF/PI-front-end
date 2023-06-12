@@ -19,21 +19,18 @@
 import Index from "views/student/Index.js";
 import Profile from "views/student/Profile.js";
 import Account from "views/student/Account.js";
-import Register from "views/student/Register.js";
-import Login from "views/student/Login.js";
 import Payment from "views/student/Payment.js";
 import Icons from "views/student/History.js";
-import BillExchange from "views/admin/BillExchange";
 import BillOfExchange from "views/student/BillOfExchange";
 
 var routes = [
-  {
-    path: "/index",
-    name: "Dashboard",
-    icon: "ni ni-tv-2 text-primary",
-    component: <Index />,
-    layout: "/student",
-  },
+  // {
+  //   path: "/index",
+  //   name: "Dashboard",
+  //   icon: "ni ni-tv-2 text-primary",
+  //   component: <Index />,
+  //   layout: "/student",
+  // },
   {
     path: "/history",
     name: "hisotry",
@@ -62,13 +59,13 @@ var routes = [
     component: <Payment />,
     layout: "/student",
   },
-  {
-    path: "/billofexchange",
-    name: "billofexchange",
-    icon: "ni ni-circle-08 text-pink",
-    component: <BillOfExchange />,
-    layout: "/student",
-  },
+  // {
+  //   path: "/billofexchange",
+  //   name: "billofexchange",
+  //   icon: "ni ni-circle-08 text-pink",
+  //   component: <BillOfExchange />,
+  //   layout: "/student",
+  // },
   // {
   //   path: "/login",
   //   name: "Login",

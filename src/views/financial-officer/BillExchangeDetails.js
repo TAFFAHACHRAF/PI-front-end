@@ -63,24 +63,22 @@ const BillExchangeDetails = () => {
                         }}
                         className="mr-2"
                       />
-                      <p className="text-muted mb-0" style={{fontSize: "0.8rem"}}>
+                      <p
+                        className="text-muted mb-0"
+                        style={{ fontSize: "0.8rem" }}
+                      >
                         <b>Abir Laaroussi</b> bill exchange details
                       </p>
                     </div>
 
-                    <div className="message py-2">
-                      <h3 class="mt-3">Message</h3>
-                      <p class="mb-2">Dear Client,</p>
+                    <div className="details py-2">
                       <p
                         class="mb-2 text-dark"
                         style={{
                           fontSize: "13px",
                         }}
                       >
-                        We are pleased to inform you that your project has been
-                        completed successfully. We have put in our best efforts
-                        to meet your requirements and deliver the desired
-                        outcome.
+                        <b>Date</b> : 12/02/2023
                       </p>
                       <p
                         class="mb-2 text-dark"
@@ -88,10 +86,7 @@ const BillExchangeDetails = () => {
                           fontSize: "13px",
                         }}
                       >
-                        We would like to express our gratitude for giving us the
-                        opportunity to work on this project. Your trust and
-                        support have been invaluable throughout the entire
-                        process.
+                        <b>Type de payment : </b> virement bancaire
                       </p>
                       <p
                         class="mb-2 text-dark"
@@ -99,9 +94,7 @@ const BillExchangeDetails = () => {
                           fontSize: "13px",
                         }}
                       >
-                        If you have any further questions or need any
-                        assistance, please feel free to reach out to us. We are
-                        always here to help.
+                       <b>Montant : </b> 1000DHs
                       </p>
                       <p
                         class="mb-2 text-dark"
@@ -109,26 +102,9 @@ const BillExchangeDetails = () => {
                           fontSize: "13px",
                         }}
                       >
-                        Once again, thank you for choosing our services. We look
-                        forward to working with you again in the future.
+                        <b>Status : </b> pending
                       </p>
-                      <p
-                        class="mb-2 text-dark"
-                        style={{
-                          fontSize: "13px",
-                        }}
-                      >
-                        Best regards,
-                      </p>
-                      <p
-                        class="mb-2 text-dark"
-                        style={{
-                          fontSize: "13px",
-                        }}
-                      >
-                        Your Name
-                      </p>
-
+                      
                       <p className="mt-3">
                         <b className="border-bottom">
                           <small>
@@ -153,7 +129,10 @@ const BillExchangeDetails = () => {
                   </Col>
                   <Col lg="6">
                     <div className="d-flex align-items-center border-bottom pb-3 pt-2">
-                      <p className="text-muted mb-0" style={{fontSize: "0.8rem"}}>
+                      <p
+                        className="text-muted mb-0"
+                        style={{ fontSize: "0.8rem" }}
+                      >
                         <b>Professor</b> reply
                       </p>
                     </div>
@@ -165,7 +144,7 @@ const BillExchangeDetails = () => {
                               <i className="ni ni-hat-3" />
                             </InputGroupText>
                           </InputGroupAddon>
-                          <Input placeholder="Subject" type="text" />
+                          <Input placeholder="Subject (optional)" type="text" />
                         </InputGroup>
                       </FormGroup>
                       <FormGroup>
@@ -176,15 +155,19 @@ const BillExchangeDetails = () => {
                             </InputGroupText>
                           </InputGroupAddon>
                           <Input
-                            placeholder="Message"
+                            placeholder="Message (optional)"
                             type="textarea"
                             style={{ minHeight: "200px" }}
                           />
                         </InputGroup>
+                        
                       </FormGroup>
                       <div className="text-center">
-                        <Button className="mt-4" color="primary" type="button">
-                          Send
+                        <Button className="mt-4" color="success" type="button">
+                          Valider
+                        </Button>
+                        <Button className="mt-4" color="danger" type="button">
+                          Decliner
                         </Button>
                       </div>
                     </Form>

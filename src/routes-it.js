@@ -17,60 +17,68 @@
 */
 
 import Index from "views/student/Index.js";
-import Profile from "views/student/Profile.js";
-import Account from "views/student/Account.js";
-import Register from "views/student/Register.js";
-import Login from "views/student/Login.js";
-import Payment from "views/student/Payment.js";
-import Icons from "views/student/History.js";
-import BillExchange from "views/admin/BillExchange";
-import BillOfExchange from "views/student/BillOfExchange";
 import Tables from "views/admin/Tables";
 import Maps from "views/admin/Maps";
-import Classes from "views/admin/Classes";
-import StudentData from "views/admin/StudentData";
+import Classes from "views/IT-manager/Classes";
 import Formation from "views/admin/Formation";
+import Staff from "views/IT-manager/Staff";
+import AddClass from "views/IT-manager/AddClass";
+import Profile from "views/IT-manager/Profile";
 
 var routes = [
-  {
-    path: "/index",
-    name: "Dashboard",
-    icon: "ni ni-tv-2 text-primary",
-    component: <Index />,
-    layout: "/it",
-  },
+  // {
+  //   path: "/index",
+  //   name: "Dashboard",
+  //   icon: "ni ni-tv-2 text-primary",
+  //   component: <Index />,
+  //   layout: "/it",
+  // },
   {
     path: "/studentList",
-    name: "studentList",
-    icon: "ni ni-planet text-blue",
+    name: "Students",
+    icon: "fa-sharp fa-solid fa-graduation-cap text-warning",
     component: <Tables />,
     layout: "/it",
   },
   {
     path: "/addStudent",
     name: "Add students",
-    icon: "ni ni-pin-3 text-orange",
+    icon: "fa-solid fa-plus text-red",
     component: <Maps />,
     layout: "/it",
   },
   {
     path: "/classes",
     name: "Classes",
-    icon: "ni ni-planet text-blue",
+    icon: "fa-solid fa-link text-yellow",
     component: <Classes />,
     layout: "/it",
   },
-  // {
-  //   path: "/StudentData",
-  //   name: "studentData",
-  //   icon: "ni ni-planet text-blue",
-  //   component: <StudentData />,
-  //   layout: "/it",
-  // },
+  {
+    path: "/staff",
+    name: "Staff",
+    icon: "fa-solid fa-user text-blue",
+    component: <Staff />,
+    layout: "/it",
+  },
+  {
+    path: "/addClass",
+    name: "AddClass",
+    icon: "fa-solid fa-graduation-cap",
+    component: <AddClass />,
+    layout: "/it",
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    icon: "fa-regular fa-user text-pink",
+    component: <Profile />,
+    layout: "/it",
+  },
   {
     path: "/formations",
-    name: "formation",
-    icon: "ni ni-planet text-blue",
+    name: "Education",
+    icon: "fa-solid fa-link text-blue",
     component: <Formation />,
     layout: "/it",
   }

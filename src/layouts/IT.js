@@ -67,18 +67,18 @@ const IT = (props) => {
         routes={routes}
         logo={{
           innerLink: "/it/index",
-          imgSrc: require("../assets/img/brand/argon-react.png"),
+          imgSrc: require("../assets/img/brand/enset.svg").default,
           imgAlt: "...",
         }}
       />
-      <div className="main-content" ref={mainContent}>
+    <div className="main-content" ref={mainContent}>
         <AdminNavbar
           {...props}
-          brandText={getBrandText(props?.location?.pathname)}
+          brandText="It director"
         />
         <Routes>
           {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/it/index" replace />} />
+          <Route path="*" element={<Navigate to="/it/classes" replace />} />
         </Routes>
         <Container fluid>
           <AdminFooter />

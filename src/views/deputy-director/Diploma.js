@@ -31,6 +31,7 @@ import {
   PaginationItem,
   PaginationLink,
   Badge,
+  Form, FormGroup, Input, Button
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
@@ -45,8 +46,38 @@ const Diploma = () => {
         <Row>
           <div className="col-12">
             <Card className="shadow">
-              <CardHeader className="bg-transparent">
+
+            <CardHeader className="bg-transparent d-flex justify-content-between">
                 <h3 className="mb-0">Eligible Students for diploma:</h3>
+                <Form
+                  role="form"
+                  style={{
+                    width: "60%",
+                  }}
+                  className="d-flex justify-content-between"
+                >
+                  <FormGroup className="mb-0">
+                    <Input id="exampleSelect" name="select" type="select">
+                      <option>Departement</option>
+                      <option>Bank transfer</option>
+                      <option>Bill of exchange</option>
+                      <option>Check</option>
+                    </Input>
+                  </FormGroup>
+                  <FormGroup className="mb-0">
+                    <Input id="exampleSelect" name="select" type="select">
+                      <option>Classes</option>
+                      <option>Bank transfer</option>
+                      <option>Bill of exchange</option>
+                      <option>Check</option>
+                    </Input>
+                  </FormGroup>
+                  <div className="text-center">
+                    <Button color="primary" type="button">
+                      Search students
+                    </Button>
+                  </div>
+                </Form>
               </CardHeader>
               <CardBody>
                 <Row className="icon-examples px-2">

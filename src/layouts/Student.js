@@ -67,18 +67,18 @@ const Student = (props) => {
         routes={routes}
         logo={{
           innerLink: "/student/index",
-          imgSrc: require("../assets/img/brand/argon-react.png"),
+          imgSrc: require("../assets/img/brand/enset.svg").default,
           imgAlt: "...",
         }}
       />
       <div className="main-content" ref={mainContent}>
         <AdminNavbar
           {...props}
-          brandText={getBrandText(props?.location?.pathname)}
+          brandText="Student"
         />
         <Routes>
           {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/student/index" replace />} />
+          <Route path="*" element={<Navigate to="/student/history" replace />} />
         </Routes>
         <Container fluid>
           <AdminFooter />
