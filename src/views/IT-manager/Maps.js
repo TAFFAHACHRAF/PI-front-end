@@ -91,6 +91,7 @@ const Maps = () => {
                                 placeholder="Email"
                                 type="email"
                                 autoComplete="new-email"
+                                name="email"
                               />
                             </InputGroup>
                           </FormGroup>

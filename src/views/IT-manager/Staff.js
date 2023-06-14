@@ -30,8 +30,27 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
+import { useEffect , useState } from "react";
+import axios from "axios";
 
 const Staff = () => {
+  const [staff, setStaff] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8888/authentification/staph", {
+      headers: {
+        Authorization:
+          "Bearer " + JSON.parse(localStorage.getItem("user_data")).accessToken,
+      },
+    })
+    .then((res) => {
+      setStaff(res.data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }, []);
+
   return (
     <>
       <Header />
@@ -46,223 +65,42 @@ const Staff = () => {
               </CardHeader>
               <div className="container">
                 <div className="row">
-                  <div className="col-4 mb-2">
-                    <div className="card">
-                      <div className="text-center pt-2">
-                        <div class="img-hover-zoom img-hover-zoom--colorize">
-                          <img
-                            class="shadow rounded-circle img-fluid"
-                            src="https://source.unsplash.com/rDEOVtE7vOs/100x100"
-                            alt="Another Image zoom-on-hover effect"
-                          />
-                        </div>
-                        <div class="card-body p-2">
-                          <div class="clearfix mb-1"></div>
 
-                          <div class="text-center">
-                            <h3>Mia Wallace</h3>
+                 {
+                    staff.map((item) => (
+                      <div className="col-4 mb-2">
+                      <div className="card">
+                        <div className="text-center pt-2">
+                          <div class="img-hover-zoom img-hover-zoom--colorize">
+                            <img
+                              class="shadow rounded-circle img-fluid"
+                              src="https://source.unsplash.com/rDEOVtE7vOs/100x100"
+                              alt="Another Image zoom-on-hover effect"
+                            />
                           </div>
-                          <div class="mb-3">
-                            <p class="text-uppercase text-center role">
-                              Director general
-                            </p>
-                          </div>
-                          <div class="box">
-                            <div>
-                              <Button outline>Details</Button>
+                          <div class="card-body p-2">
+                            <div class="clearfix mb-1"></div>
+  
+                            <div class="text-center">
+                              <h3>{item.firstName + " " + item.lastName}</h3>
+                            </div>
+                            <div class="mb-3">
+                              <p class="text-uppercase text-center role">
+                                {item.roleDTOList.name}
+                              </p>
+                            </div>
+                            <div class="box">
+                              <div>
+                                <Button outline>Details</Button>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-
-                  <div className="col-4 mb-2">
-                    <div className="card">
-                      <div className="text-center pt-2">
-                        <div class="img-hover-zoom img-hover-zoom--colorize">
-                          <img
-                            class="shadow rounded-circle img-fluid"
-                            src="https://source.unsplash.com/rDEOVtE7vOs/100x100"
-                            alt="Another Image zoom-on-hover effect"
-                          />
-                        </div>
-                        <div class="card-body p-2">
-                          <div class="clearfix mb-1"></div>
-
-                          <div class="text-center">
-                            <h3>Mia Wallace</h3>
-                          </div>
-                          <div class="mb-3">
-                            <p class="text-uppercase text-center role">
-                              Director general
-                            </p>
-                          </div>
-                          <div class="box">
-                            <div>
-                              <Button outline>Details</Button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="col-4 mb-2">
-                    <div className="card">
-                      <div className="text-center pt-2">
-                        <div class="img-hover-zoom img-hover-zoom--colorize">
-                          <img
-                            class="shadow rounded-circle img-fluid"
-                            src="https://source.unsplash.com/rDEOVtE7vOs/100x100"
-                            alt="Another Image zoom-on-hover effect"
-                          />
-                        </div>
-                        <div class="card-body p-2">
-                          <div class="clearfix mb-1"></div>
-
-                          <div class="text-center">
-                            <h3>Mia Wallace</h3>
-                          </div>
-                          <div class="mb-3">
-                            <p class="text-uppercase text-center role">
-                              Director general
-                            </p>
-                          </div>
-                          <div class="box">
-                            <div>
-                              <Button outline>Details</Button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="col-4 mb-2">
-                    <div className="card">
-                      <div className="text-center pt-2">
-                        <div class="img-hover-zoom img-hover-zoom--colorize">
-                          <img
-                            class="shadow rounded-circle img-fluid"
-                            src="https://source.unsplash.com/rDEOVtE7vOs/100x100"
-                            alt="Another Image zoom-on-hover effect"
-                          />
-                        </div>
-                        <div class="card-body p-2">
-                          <div class="clearfix mb-1"></div>
-
-                          <div class="text-center">
-                            <h3>Mia Wallace</h3>
-                          </div>
-                          <div class="mb-3">
-                            <p class="text-uppercase text-center role">
-                              Director general
-                            </p>
-                          </div>
-                          <div class="box">
-                            <div>
-                              <Button outline>Details</Button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="col-4 mb-2">
-                    <div className="card">
-                      <div className="text-center pt-2">
-                        <div class="img-hover-zoom img-hover-zoom--colorize">
-                          <img
-                            class="shadow rounded-circle img-fluid"
-                            src="https://source.unsplash.com/rDEOVtE7vOs/100x100"
-                            alt="Another Image zoom-on-hover effect"
-                          />
-                        </div>
-                        <div class="card-body p-2">
-                          <div class="clearfix mb-1"></div>
-
-                          <div class="text-center">
-                            <h3>Mia Wallace</h3>
-                          </div>
-                          <div class="mb-3">
-                            <p class="text-uppercase text-center role">
-                              Director general
-                            </p>
-                          </div>
-                          <div class="box">
-                            <div>
-                              <Button outline>Details</Button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="col-4 mb-2">
-                    <div className="card">
-                      <div className="text-center pt-2">
-                        <div class="img-hover-zoom img-hover-zoom--colorize">
-                          <img
-                            class="shadow rounded-circle img-fluid"
-                            src="https://source.unsplash.com/rDEOVtE7vOs/100x100"
-                            alt="Another Image zoom-on-hover effect"
-                          />
-                        </div>
-                        <div class="card-body p-2">
-                          <div class="clearfix mb-1"></div>
-
-                          <div class="text-center">
-                            <h3>Mia Wallace</h3>
-                          </div>
-                          <div class="mb-3">
-                            <p class="text-uppercase text-center role">
-                              Director general
-                            </p>
-                          </div>
-                          <div class="box">
-                            <div>
-                              <Button outline>Details</Button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="col-4 mb-2">
-                    <div className="card">
-                      <div className="text-center pt-2">
-                        <div class="img-hover-zoom img-hover-zoom--colorize">
-                          <img
-                            class="shadow rounded-circle img-fluid"
-                            src="https://source.unsplash.com/rDEOVtE7vOs/100x100"
-                            alt="Another Image zoom-on-hover effect"
-                          />
-                        </div>
-                        <div class="card-body p-2">
-                          <div class="clearfix mb-1"></div>
-
-                          <div class="text-center">
-                            <h3>Mia Wallace</h3>
-                          </div>
-                          <div class="mb-3">
-                            <p class="text-uppercase text-center role">
-                              Director general
-                            </p>
-                          </div>
-                          <div class="box">
-                            <div>
-                              <Button outline>Details</Button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
+                    ))
+                 }
+                 
                 </div>
               </div>
               <CardFooter className="py-4">

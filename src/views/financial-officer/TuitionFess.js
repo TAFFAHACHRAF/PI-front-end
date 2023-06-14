@@ -60,6 +60,7 @@ const TuitionFess = () => {
         },
       })
       .then((res) => {
+        console.log(res.data)
         setFormatins(res.data);
       })
       .catch((err) => console.log(err));
