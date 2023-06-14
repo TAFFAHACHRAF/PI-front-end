@@ -15,7 +15,8 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+
+import React, { useEffect, useState } from "react";
 
 // reactstrap components
 import {
@@ -38,8 +39,30 @@ import {
 // core components
 import Header from "components/Headers/Header.js";
 import UploadArea from "./UploadArea";
+import { useLocation } from "react-router-dom";
 
 const Maps = () => {
+  // const location = useLocation();
+  // const { id, students, classes } = location.state;
+  // const [idMajorOfStudent, setIdMajorOfStudent] = useState([]);
+  // const [studentData, setStudentData] = useState({
+  //   firstName: "",
+  //   lastName: "",
+  //   address: "",
+  //   email: "",
+  //   username: "",
+  //   phone: "",
+  //   cne: "",
+  //   cni: "",
+  //   username: "",
+  //   dateNaissance: "",
+  //   role: "STUDENT",
+  //   nationality: "",
+  // });
+  // const []
+
+  const getClasses = () => {};
+
   return (
     <>
       <Header />
@@ -67,7 +90,11 @@ const Maps = () => {
                                   <i className="ni ni-hat-3" />
                                 </InputGroupText>
                               </InputGroupAddon>
-                              <Input placeholder="firstname" type="text" />
+                              <Input
+                                placeholder="firstname"
+                                type="text"
+                                name="firstName"
+                              />
                             </InputGroup>
                           </FormGroup>
                           <FormGroup>
@@ -77,7 +104,11 @@ const Maps = () => {
                                   <i className="ni ni-hat-3" />
                                 </InputGroupText>
                               </InputGroupAddon>
-                              <Input placeholder="lastname" type="text" />
+                              <Input
+                                placeholder="lastname"
+                                type="text"
+                                name="lastName"
+                              />
                             </InputGroup>
                           </FormGroup>
                           <FormGroup>
@@ -91,21 +122,93 @@ const Maps = () => {
                                 placeholder="Email"
                                 type="email"
                                 autoComplete="new-email"
+                                name="email"
+                              />
+                            </InputGroup>
+                          </FormGroup>
+                          <FormGroup>
+                            <InputGroup className="input-group-alternative mb-3">
+                              <InputGroupAddon addonType="prepend">
+                                <InputGroupText>
+                                  <i className="ni ni-email-83" />
+                                </InputGroupText>
+                              </InputGroupAddon>
+                              <Input
+                                placeholder="telephone"
+                                type="tel"
+                                autoComplete="telephone"
+                                name="phone"
+                              />
+                            </InputGroup>
+                          </FormGroup>
+                          <FormGroup>
+                            <InputGroup className="input-group-alternative mb-3">
+                              <InputGroupAddon addonType="prepend">
+                                <InputGroupText>
+                                  <i className="ni ni-email-83" />
+                                </InputGroupText>
+                              </InputGroupAddon>
+                              <Input
+                                placeholder="address"
+                                type="text"
+                                autoComplete="address"
+                                name="adresse"
+                              />
+                            </InputGroup>
+                          </FormGroup>
+                          <FormGroup>
+                            <InputGroup className="input-group-alternative mb-3">
+                              <InputGroupAddon addonType="prepend">
+                                <InputGroupText>
+                                  <i className="ni ni-email-83" />
+                                </InputGroupText>
+                              </InputGroupAddon>
+                              <Input
+                                placeholder="cne"
+                                type="text"
+                                autoComplete="cne"
+                                name="cne"
+                              />
+                            </InputGroup>
+                          </FormGroup>
+                          <FormGroup>
+                            <InputGroup className="input-group-alternative mb-3">
+                              <InputGroupAddon addonType="prepend">
+                                <InputGroupText>
+                                  <i className="ni ni-email-83" />
+                                </InputGroupText>
+                              </InputGroupAddon>
+                              <Input
+                                placeholder="cni"
+                                type="text"
+                                autoComplete="cni"
+                                name="cni"
+                              />
+                            </InputGroup>
+                          </FormGroup>
+                          <FormGroup>
+                            <InputGroup className="input-group-alternative mb-3">
+                              <InputGroupAddon addonType="prepend">
+                                <InputGroupText>
+                                  <i className="ni ni-email-83" />
+                                </InputGroupText>
+                              </InputGroupAddon>
+                              <Input
+                                placeholder="username"
+                                type="text"
+                                autoComplete="username"
+                                name="username"
                               />
                             </InputGroup>
                           </FormGroup>
                           <FormGroup>
                             <Input
                               id="exampleSelect"
-                              name="select"
+                              name="gender"
                               type="select"
                             >
-                              <option>Class</option>
-                              <option>GMASI</option>
-                              <option>SEI</option>
-                              <option>GMMI</option>
-                              <option>IAA</option>
-                              <option>II</option>
+                              <option value="Male">Male</option>
+                              <option value="Female">Female</option>
                             </Input>
                           </FormGroup>
                           <FormGroup>
@@ -115,7 +218,11 @@ const Maps = () => {
                                   <i className="ni ni-lock-circle-open" />
                                 </InputGroupText>
                               </InputGroupAddon>
-                              <Input placeholder="Telephone" type="tel" />
+                              <Input
+                                placeholder="date"
+                                type="date"
+                                name="dateNaissance"
+                              />
                             </InputGroup>
                           </FormGroup>
                           <div className="text-center">
@@ -140,7 +247,9 @@ const Maps = () => {
                         backgroundColor: "#fff",
                         borderRadius: "50%",
                       }}
-                    ><b>OR</b></p>
+                    >
+                      <b>OR</b>
+                    </p>
                   </Col>
                   <Col lg="6" md="6" className="pt-3">
                     <div className="d-flex">

@@ -18,12 +18,13 @@
 
 import Index from "views/student/Index.js";
 import Tables from "views/admin/Tables";
-import Maps from "views/admin/Maps";
+import Maps from "views/IT-manager/Maps";
 import Classes from "views/IT-manager/Classes";
 import Formation from "views/admin/Formation";
 import Staff from "views/IT-manager/Staff";
 import AddClass from "views/IT-manager/AddClass";
 import Profile from "views/IT-manager/Profile";
+import StudentList from "views/IT-manager/StudentList";
 
 var routes = [
   // {
@@ -37,8 +38,9 @@ var routes = [
     path: "/studentList",
     name: "Students",
     icon: "fa-sharp fa-solid fa-graduation-cap text-warning",
-    component: <Tables />,
+    component: <StudentList />,
     layout: "/it",
+    hide: true
   },
   {
     path: "/addStudent",
@@ -46,6 +48,7 @@ var routes = [
     icon: "fa-solid fa-plus text-red",
     component: <Maps />,
     layout: "/it",
+    hide: true
   },
   {
     path: "/classes",

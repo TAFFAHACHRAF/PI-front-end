@@ -23,12 +23,15 @@ import { Container } from "reactstrap";
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import AdminFooter from "components/Footers/AdminFooter.js";
 import SidebarStudent from "components/Sidebar/Sidebar-student";
+import { useNavigate } from "react-router-dom";
 
 import routes from "routes-deputy.js";
 
 const Deputy = (props) => {
   const mainContent = React.useRef(null);
   const location = useLocation();
+  const navigate = useNavigate();
+  const isAuthentificated = localStorage.getItem("role");
 
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -36,7 +39,15 @@ const Deputy = (props) => {
     mainContent.current.scrollTop = 0;
   }, [location]);
 
+  if (isAuthentificated !== "deputy") {
+    navigate("/auth/login");
+  }
+
   const getRoutes = (routes) => {
+    if (!isAuthentificated || isAuthentificated !== "deputy") {
+      return navigate("/auth/login");
+    }
+
     return routes.map((prop, key) => {
       if (prop.layout === "/deputy") {
         return (
@@ -72,10 +83,7 @@ const Deputy = (props) => {
         }}
       />
       <div className="main-content" ref={mainContent}>
-        <AdminNavbar
-          {...props}
-          brandText="Deputy"
-        />
+        <AdminNavbar {...props} brandText="Deputy" />
         <Routes>
           {getRoutes(routes)}
           <Route path="*" element={<Navigate to="/deputy/classes" replace />} />

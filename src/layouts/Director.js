@@ -25,10 +25,14 @@ import AdminFooter from "components/Footers/AdminFooter.js";
 import SidebarStudent from "components/Sidebar/Sidebar-student";
 
 import routes from "routes-director.js";
+import { useNavigate } from "react-router-dom";
 
 const Director = (props) => {
   const mainContent = React.useRef(null);
   const location = useLocation();
+  const navigate = useNavigate();
+  const isAuthentificated = localStorage.getItem("role");
+
 
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -36,7 +40,15 @@ const Director = (props) => {
     mainContent.current.scrollTop = 0;
   }, [location]);
 
+  if (isAuthentificated !== "director") {
+    navigate("/auth/login");
+  }
+
   const getRoutes = (routes) => {
+    if (!isAuthentificated || isAuthentificated !== "director") {
+      return navigate("/auth/login");
+    }
+
     return routes.map((prop, key) => {
       if (prop.layout === "/director") {
         return (
@@ -72,13 +84,13 @@ const Director = (props) => {
         }}
       />
       <div className="main-content" ref={mainContent}>
-        <AdminNavbar
-          {...props}
-          brandText="Director"
-        />
+        <AdminNavbar {...props} brandText="Director" />
         <Routes>
           {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/director/studentList" replace />} />
+          <Route
+            path="*"
+            element={<Navigate to="/director/studentList" replace />}
+          />
         </Routes>
         <Container fluid>
           <AdminFooter />

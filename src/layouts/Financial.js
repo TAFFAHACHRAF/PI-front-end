@@ -25,10 +25,14 @@ import AdminFooter from "components/Footers/AdminFooter.js";
 import SidebarStudent from "components/Sidebar/Sidebar-student";
 
 import routes from "routes-financial.js";
+import { useNavigate } from "react-router-dom";
 
 const Financial = (props) => {
   const mainContent = React.useRef(null);
   const location = useLocation();
+  const navigate = useNavigate();
+  const isAuthentificated = localStorage.getItem("role");
+
 
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -36,7 +40,15 @@ const Financial = (props) => {
     mainContent.current.scrollTop = 0;
   }, [location]);
 
+  if (isAuthentificated !== "financial") {
+    navigate("/auth/login");
+  }
+
   const getRoutes = (routes) => {
+    if (!isAuthentificated || isAuthentificated !== "financial") {
+      return navigate("/auth/login");
+    }
+
     return routes.map((prop, key) => {
       if (prop.layout === "/financial") {
         return (
@@ -72,13 +84,13 @@ const Financial = (props) => {
         }}
       />
       <div className="main-content" ref={mainContent}>
-        <AdminNavbar
-          {...props}
-          brandText="Financial"
-        />
+        <AdminNavbar {...props} brandText="Financial" />
         <Routes>
           {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/financial/classes" replace />} />
+          <Route
+            path="*"
+            element={<Navigate to="/financial/classes" replace />}
+          />
         </Routes>
         <Container fluid>
           <AdminFooter />

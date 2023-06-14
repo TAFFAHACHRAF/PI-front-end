@@ -16,7 +16,13 @@
 
 */
 import React from "react";
-import { useLocation, Route, Routes, Navigate } from "react-router-dom";
+import {
+  useLocation,
+  Route,
+  Routes,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 // reactstrap components
 import { Container } from "reactstrap";
 // core components
@@ -29,6 +35,9 @@ import routes from "routes-it.js";
 const IT = (props) => {
   const mainContent = React.useRef(null);
   const location = useLocation();
+  const navigate = useNavigate();
+  const isAuthentificated = localStorage.getItem("role");
+
 
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -36,7 +45,15 @@ const IT = (props) => {
     mainContent.current.scrollTop = 0;
   }, [location]);
 
+  if (isAuthentificated !== "it") {
+    navigate("/auth/login");
+  }
+
   const getRoutes = (routes) => {
+    if (!isAuthentificated || isAuthentificated !== "it") {
+      return navigate("/auth/login");
+    }
+
     return routes.map((prop, key) => {
       if (prop.layout === "/it") {
         return (
@@ -71,11 +88,8 @@ const IT = (props) => {
           imgAlt: "...",
         }}
       />
-    <div className="main-content" ref={mainContent}>
-        <AdminNavbar
-          {...props}
-          brandText="It director"
-        />
+      <div className="main-content" ref={mainContent}>
+        <AdminNavbar {...props} brandText="It director" />
         <Routes>
           {getRoutes(routes)}
           <Route path="*" element={<Navigate to="/it/classes" replace />} />

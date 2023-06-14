@@ -16,20 +16,11 @@
 
 */
 
-import Index from "views/student/Index.js";
-import Profile from "views/student/Profile.js";
-import Account from "views/student/Account.js";
-import Register from "views/student/Register.js";
-import Login from "views/student/Login.js";
 import Payment from "views/financial-officer/Payment.js";
-import Icons from "views/student/History.js";
 import BillExchange from "views/financial-officer/BillExchange.js";
 import BillExchangeDetails from "views/financial-officer/BillExchangeDetails";
-import Tables from "views/admin/Tables";
-import Maps from "views/admin/Maps";
-import Classes from "views/admin/Classes";
-import StudentData from "views/admin/StudentData";
-import Formation from "views/admin/Formation";
+import Tables from "views/financial-officer/Tables";
+import Classes from "views/financial-officer/Classes";
 import TuitionFess from "views/financial-officer/TuitionFess";
 
 var routes = [
@@ -46,6 +37,7 @@ var routes = [
     icon: "a-sharp fa-solid fa-graduation-cap text-warning",
     component: <Tables />,
     layout: "/financial",
+    hide: true
   },
   {
     path: "/classes",
@@ -67,6 +59,7 @@ var routes = [
     icon: "fa-solid fa-circle-info text-success",
     component: <BillExchangeDetails />,
     layout: "/financial",
+    hide: true
   },
   {
     path: "/payment",
@@ -74,6 +67,7 @@ var routes = [
     icon: "fa-solid fa-plus text-blue",
     component: <Payment />,
     layout: "/financial",
+    hide: true
   },
   {
     path: "/Tuition fess",

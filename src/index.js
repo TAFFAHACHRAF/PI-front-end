@@ -31,6 +31,7 @@ import SchoolingLayout from "layouts/Schooling";
 import DeputyLayout from "layouts/Deputy";
 import ITLayout from "layouts/IT";
 import DirectorLayout from "layouts/Director";
+import Tables from "views/admin/Tables";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // reactstrap components
 import {
@@ -31,8 +31,27 @@ import {
 
 // core components
 import Header from "components/Headers/Header.js";
+import axios from "axios";
 
 const Maps = () => {
+
+  const [user , setUserData] = useState([]);
+
+
+  useEffect(() => {
+    axios.get("http://localhost:8888/authentification/student/"+ JSON.parse(localStorage.getItem("user_data")).userDTO.id,   {
+      headers: {
+        Authorization:
+          "Bearer " +
+          JSON.parse(localStorage.getItem("user_data")).accessToken,
+      },
+    }).then((res) => {
+        setUserData(res.data);
+    })
+    .catch(err => console.log(err))
+  }, [])
+
+
   return (
     <>
       <Header />
@@ -82,7 +101,7 @@ const Maps = () => {
                           className="img-fluid mx-auto d-block"
                         />
                         <p className="text-center mt-1 mb-0">
-                          <b>Abir Laaroussi</b>
+                          <b>{user.firstName + " " + user.lastName}</b>
                         </p>
                         <p className="text-center mt--2">
                           <small>2 ème anneé master en XXXX</small>

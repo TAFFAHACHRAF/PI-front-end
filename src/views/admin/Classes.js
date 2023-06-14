@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // react component that copies the given text inside your clipboard
 import { CopyToClipboard } from "react-copy-to-clipboard";
 // reactstrap components
@@ -30,8 +30,39 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Classes = () => {
+  const [classes, setClasses] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8888/educations/major/head_of_departement/3", {
+        headers: {
+          Authorization:
+            "Bearer " +
+            JSON.parse(localStorage.getItem("user_data")).accessToken,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setClasses([...response.data]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const goToStudentList = (majorId , major) => {
+    navigate("/admin/studentsList" , {state : {
+      id : majorId,
+      major,
+      classes
+    }});
+  }
+
   return (
     <>
       <Header />
@@ -46,261 +77,36 @@ const Classes = () => {
               </CardHeader>
               <CardBody>
                 <Row className="icon-examples">
-                  <Col lg="6" md="6">
-                    <button
-                      className="btn-icon-clipboard"
-                      id="tooltip982655500"
-                      type="button"
-                    >
-                      <div className="d-block">
-                        <p className="mb-0">
-                          <b>GRH</b> -{" "}
-                          <small>Gestion des Ressources Humaines</small>
-                        </p>
-                        <p className="mb-0">
-                          <b>Diplôme</b> : <small>Licence d'Université</small>
-                        </p>
-                        <p>
-                          <b>Département</b> :{" "}
-                          <small>
-                            Sciences et Techniques Administratives et Ingénierie
-                            des Compétences
-                          </small>
-                        </p>
-                      </div>
-                    </button>
-                  </Col>
-
-                  <Col lg="6" md="6">
-                    <button
-                      className="btn-icon-clipboard"
-                      id="tooltip982655500"
-                      type="button"
-                    >
-                      <div className="d-block">
-                        <p className="mb-0">
-                          <b>GRH</b> -{" "}
-                          <small>Gestion des Ressources Humaines</small>
-                        </p>
-                        <p className="mb-0">
-                          <b>Diplôme</b> : <small>Licence d'Université</small>
-                        </p>
-                        <p>
-                          <b>Département</b> :{" "}
-                          <small>
-                            Sciences et Techniques Administratives et Ingénierie
-                            des Compétences
-                          </small>
-                        </p>
-                      </div>
-                    </button>
-                  </Col>
-
-                  <Col lg="6" md="6">
-                    <button
-                      className="btn-icon-clipboard"
-                      id="tooltip982655500"
-                      type="button"
-                    >
-                      <div className="d-block">
-                        <p className="mb-0">
-                          <b>GRH</b> -{" "}
-                          <small>Gestion des Ressources Humaines</small>
-                        </p>
-                        <p className="mb-0">
-                          <b>Diplôme</b> : <small>Licence d'Université</small>
-                        </p>
-                        <p>
-                          <b>Département</b> :{" "}
-                          <small>
-                            Sciences et Techniques Administratives et Ingénierie
-                            des Compétences
-                          </small>
-                        </p>
-                      </div>
-                    </button>
-                  </Col>
-
-                  <Col lg="6" md="6">
-                    <button
-                      className="btn-icon-clipboard"
-                      id="tooltip982655500"
-                      type="button"
-                    >
-                      <div className="d-block">
-                        <p className="mb-0">
-                          <b>GRH</b> -{" "}
-                          <small>Gestion des Ressources Humaines</small>
-                        </p>
-                        <p className="mb-0">
-                          <b>Diplôme</b> : <small>Licence d'Université</small>
-                        </p>
-                        <p>
-                          <b>Département</b> :{" "}
-                          <small>
-                            Sciences et Techniques Administratives et Ingénierie
-                            des Compétences
-                          </small>
-                        </p>
-                      </div>
-                    </button>
-                  </Col>
-
-                  <Col lg="6" md="6">
-                    <button
-                      className="btn-icon-clipboard"
-                      id="tooltip982655500"
-                      type="button"
-                    >
-                      <div className="d-block">
-                        <p className="mb-0">
-                          <b>GRH</b> -{" "}
-                          <small>Gestion des Ressources Humaines</small>
-                        </p>
-                        <p className="mb-0">
-                          <b>Diplôme</b> : <small>Licence d'Université</small>
-                        </p>
-                        <p>
-                          <b>Département</b> :{" "}
-                          <small>
-                            Sciences et Techniques Administratives et Ingénierie
-                            des Compétences
-                          </small>
-                        </p>
-                      </div>
-                    </button>
-                  </Col>
-
-                  <Col lg="6" md="6">
-                    <button
-                      className="btn-icon-clipboard"
-                      id="tooltip982655500"
-                      type="button"
-                    >
-                      <div className="d-block">
-                        <p className="mb-0">
-                          <b>GRH</b> -{" "}
-                          <small>Gestion des Ressources Humaines</small>
-                        </p>
-                        <p className="mb-0">
-                          <b>Diplôme</b> : <small>Licence d'Université</small>
-                        </p>
-                        <p>
-                          <b>Département</b> :{" "}
-                          <small>
-                            Sciences et Techniques Administratives et Ingénierie
-                            des Compétences
-                          </small>
-                        </p>
-                      </div>
-                    </button>
-                  </Col>
-
-                  <Col lg="6" md="6">
-                    <button
-                      className="btn-icon-clipboard"
-                      id="tooltip982655500"
-                      type="button"
-                    >
-                      <div className="d-block">
-                        <p className="mb-0">
-                          <b>GRH</b> -{" "}
-                          <small>Gestion des Ressources Humaines</small>
-                        </p>
-                        <p className="mb-0">
-                          <b>Diplôme</b> : <small>Licence d'Université</small>
-                        </p>
-                        <p>
-                          <b>Département</b> :{" "}
-                          <small>
-                            Sciences et Techniques Administratives et Ingénierie
-                            des Compétences
-                          </small>
-                        </p>
-                      </div>
-                    </button>
-                  </Col>
-
-                  <Col lg="6" md="6">
-                    <button
-                      className="btn-icon-clipboard"
-                      id="tooltip982655500"
-                      type="button"
-                    >
-                      <div className="d-block">
-                        <p className="mb-0">
-                          <b>GRH</b> -{" "}
-                          <small>Gestion des Ressources Humaines</small>
-                        </p>
-                        <p className="mb-0">
-                          <b>Diplôme</b> : <small>Licence d'Université</small>
-                        </p>
-                        <p>
-                          <b>Département</b> :{" "}
-                          <small>
-                            Sciences et Techniques Administratives et Ingénierie
-                            des Compétences
-                          </small>
-                        </p>
-                      </div>
-                    </button>
-                  </Col>
-
-                  <Col lg="6" md="6">
-                    <button
-                      className="btn-icon-clipboard"
-                      id="tooltip982655500"
-                      type="button"
-                    >
-                      <div className="d-block">
-                        <p className="mb-0">
-                          <b>GRH</b> -{" "}
-                          <small>Gestion des Ressources Humaines</small>
-                        </p>
-                        <p className="mb-0">
-                          <b>Diplôme</b> : <small>Licence d'Université</small>
-                        </p>
-                        <p>
-                          <b>Département</b> :{" "}
-                          <small>
-                            Sciences et Techniques Administratives et Ingénierie
-                            des Compétences
-                          </small>
-                        </p>
-                      </div>
-                    </button>
-                  </Col>
-
-                  <Col lg="6" md="6">
-                    <button
-                      className="btn-icon-clipboard"
-                      id="tooltip982655500"
-                      type="button"
-                    >
-                      <div className="d-block">
-                        <p className="mb-0">
-                          <b>GRH</b> -{" "}
-                          <small>Gestion des Ressources Humaines</small>
-                        </p>
-                        <p className="mb-0">
-                          <b>Diplôme</b> : <small>Licence d'Université</small>
-                        </p>
-                        <p>
-                          <b>Département</b> :{" "}
-                          <small>
-                            Sciences et Techniques Administratives et Ingénierie
-                            des Compétences
-                          </small>
-                        </p>
-                      </div>
-                    </button>
-                  </Col>
+                  {classes.map((classe) => (
+                    <Col lg="6" md="6" key={classe.id} onClick={() => goToStudentList(classe.id , classe.name)}>
+                      <button
+                        className="btn-icon-clipboard"
+                        id="tooltip982655500"
+                        type="button"
+                      >
+                        <div className="d-block">
+                          <p className="mb-0">
+                            <b>Filiere :</b> {" "}
+                            <small>{classe.name}</small>
+                          </p>
+                          <p className="mb-0">
+                            <b>Diplôme</b> :{" "}
+                            <small>{classe?.education?.diploma}</small>
+                          </p>
+                          <p>
+                            <b>Département</b> :{" "}
+                            <small>{classe?.departement?.intitule}</small>
+                          </p>
+                        </div>
+                      </button>
+                    </Col>
+                  ))}
                 </Row>
               </CardBody>
             </Card>
           </div>
 
-          <div className="col-12">
+          {/* <div className="col-12">
             <Card className="shadow">
               <CardHeader className="bg-transparent">
                 <h3 className="mb-0">Diplôme : Master d'Université</h3>
@@ -316,16 +122,16 @@ const Classes = () => {
                       <div className="d-block">
                         <p className="mb-0">
                           <b>CGIF</b> -{" "}
-                          <small>Contrôle de Gestion et Ingénierie Financière</small>
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
                         </p>
                         <p className="mb-0">
                           <b>Diplôme</b> : <small>Master d'Université</small>
                         </p>
                         <p>
                           <b>Département</b> :{" "}
-                          <small>
-                            Génie Economie et Gestion
-                          </small>
+                          <small>Génie Economie et Gestion</small>
                         </p>
                       </div>
                     </button>
@@ -340,16 +146,16 @@ const Classes = () => {
                       <div className="d-block">
                         <p className="mb-0">
                           <b>CGIF</b> -{" "}
-                          <small>Contrôle de Gestion et Ingénierie Financière</small>
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
                         </p>
                         <p className="mb-0">
                           <b>Diplôme</b> : <small>Master d'Université</small>
                         </p>
                         <p>
                           <b>Département</b> :{" "}
-                          <small>
-                            Génie Economie et Gestion
-                          </small>
+                          <small>Génie Economie et Gestion</small>
                         </p>
                       </div>
                     </button>
@@ -364,16 +170,16 @@ const Classes = () => {
                       <div className="d-block">
                         <p className="mb-0">
                           <b>CGIF</b> -{" "}
-                          <small>Contrôle de Gestion et Ingénierie Financière</small>
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
                         </p>
                         <p className="mb-0">
                           <b>Diplôme</b> : <small>Master d'Université</small>
                         </p>
                         <p>
                           <b>Département</b> :{" "}
-                          <small>
-                            Génie Economie et Gestion
-                          </small>
+                          <small>Génie Economie et Gestion</small>
                         </p>
                       </div>
                     </button>
@@ -388,16 +194,16 @@ const Classes = () => {
                       <div className="d-block">
                         <p className="mb-0">
                           <b>CGIF</b> -{" "}
-                          <small>Contrôle de Gestion et Ingénierie Financière</small>
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
                         </p>
                         <p className="mb-0">
                           <b>Diplôme</b> : <small>Master d'Université</small>
                         </p>
                         <p>
                           <b>Département</b> :{" "}
-                          <small>
-                            Génie Economie et Gestion
-                          </small>
+                          <small>Génie Economie et Gestion</small>
                         </p>
                       </div>
                     </button>
@@ -412,16 +218,16 @@ const Classes = () => {
                       <div className="d-block">
                         <p className="mb-0">
                           <b>CGIF</b> -{" "}
-                          <small>Contrôle de Gestion et Ingénierie Financière</small>
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
                         </p>
                         <p className="mb-0">
                           <b>Diplôme</b> : <small>Master d'Université</small>
                         </p>
                         <p>
                           <b>Département</b> :{" "}
-                          <small>
-                            Génie Economie et Gestion
-                          </small>
+                          <small>Génie Economie et Gestion</small>
                         </p>
                       </div>
                     </button>
@@ -436,16 +242,16 @@ const Classes = () => {
                       <div className="d-block">
                         <p className="mb-0">
                           <b>CGIF</b> -{" "}
-                          <small>Contrôle de Gestion et Ingénierie Financière</small>
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
                         </p>
                         <p className="mb-0">
                           <b>Diplôme</b> : <small>Master d'Université</small>
                         </p>
                         <p>
                           <b>Département</b> :{" "}
-                          <small>
-                            Génie Economie et Gestion
-                          </small>
+                          <small>Génie Economie et Gestion</small>
                         </p>
                       </div>
                     </button>
@@ -460,16 +266,16 @@ const Classes = () => {
                       <div className="d-block">
                         <p className="mb-0">
                           <b>CGIF</b> -{" "}
-                          <small>Contrôle de Gestion et Ingénierie Financière</small>
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
                         </p>
                         <p className="mb-0">
                           <b>Diplôme</b> : <small>Master d'Université</small>
                         </p>
                         <p>
                           <b>Département</b> :{" "}
-                          <small>
-                            Génie Economie et Gestion
-                          </small>
+                          <small>Génie Economie et Gestion</small>
                         </p>
                       </div>
                     </button>
@@ -484,16 +290,16 @@ const Classes = () => {
                       <div className="d-block">
                         <p className="mb-0">
                           <b>CGIF</b> -{" "}
-                          <small>Contrôle de Gestion et Ingénierie Financière</small>
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
                         </p>
                         <p className="mb-0">
                           <b>Diplôme</b> : <small>Master d'Université</small>
                         </p>
                         <p>
                           <b>Département</b> :{" "}
-                          <small>
-                            Génie Economie et Gestion
-                          </small>
+                          <small>Génie Economie et Gestion</small>
                         </p>
                       </div>
                     </button>
@@ -508,16 +314,16 @@ const Classes = () => {
                       <div className="d-block">
                         <p className="mb-0">
                           <b>CGIF</b> -{" "}
-                          <small>Contrôle de Gestion et Ingénierie Financière</small>
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
                         </p>
                         <p className="mb-0">
                           <b>Diplôme</b> : <small>Master d'Université</small>
                         </p>
                         <p>
                           <b>Département</b> :{" "}
-                          <small>
-                            Génie Economie et Gestion
-                          </small>
+                          <small>Génie Economie et Gestion</small>
                         </p>
                       </div>
                     </button>
@@ -532,16 +338,16 @@ const Classes = () => {
                       <div className="d-block">
                         <p className="mb-0">
                           <b>CGIF</b> -{" "}
-                          <small>Contrôle de Gestion et Ingénierie Financière</small>
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
                         </p>
                         <p className="mb-0">
                           <b>Diplôme</b> : <small>Master d'Université</small>
                         </p>
                         <p>
                           <b>Département</b> :{" "}
-                          <small>
-                            Génie Economie et Gestion
-                          </small>
+                          <small>Génie Economie et Gestion</small>
                         </p>
                       </div>
                     </button>
@@ -549,7 +355,7 @@ const Classes = () => {
                 </Row>
               </CardBody>
             </Card>
-          </div>
+          </div> */}
         </Row>
       </Container>
     </>

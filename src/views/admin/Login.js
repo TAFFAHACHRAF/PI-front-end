@@ -1,21 +1,3 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.2.3
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
 // reactstrap components
 import {
   Button,
@@ -31,8 +13,49 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    username: "hod1",
+    password: "hod1@",
+    grantType: "password",
+  });
+
+  useEffect(() =>{
+     axios.post("http://localhost:8888/authentification/token", formData)
+      .then((res) => {
+        const role = res.data.userDTO.roleDTOList[0].name.split("_");
+
+        if (role.length > 1) {
+          let toRole = role[0].toLowerCase();
+          if (toRole === "general") {
+            toRole = "director";
+          }
+
+          if (toRole === "head") {
+            toRole = "admin";
+          }
+
+          localStorage.setItem("user_data", JSON.stringify(res.data));
+          localStorage.setItem("role", toRole.toLowerCase);
+          navigate("/" + toRole);
+        }
+
+        localStorage.setItem("user_data", JSON.stringify(res.data));
+        localStorage.setItem("role", role[0].toLowerCase());
+        navigate("/" + role[0].toLowerCase());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+      
+  }, []);
+
   return (
     <>
       <Col lg="5" md="7">

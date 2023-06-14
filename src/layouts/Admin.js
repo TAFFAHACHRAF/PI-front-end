@@ -25,10 +25,16 @@ import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 
 import routes from "routes.js";
+import { useNavigate } from "react-router-dom";
+import Tables from "views/admin/Tables";
+import Maps from "views/admin/Maps";
+
 
 const Admin = (props) => {
   const mainContent = React.useRef(null);
   const location = useLocation();
+  const navigate = useNavigate();
+  const isAuthentificated = localStorage.getItem("role");
 
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -36,7 +42,17 @@ const Admin = (props) => {
     mainContent.current.scrollTop = 0;
   }, [location]);
 
+
+  if (isAuthentificated !== "head") {
+    navigate("/auth/login");
+  }
+
   const getRoutes = (routes) => {
+
+    if (!isAuthentificated || isAuthentificated !== "head") {
+      return navigate("/auth/login");
+    }
+
     return routes.map((prop, key) => {
       if (prop.layout === "/admin") {
         return (

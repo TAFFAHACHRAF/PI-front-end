@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // react component that copies the given text inside your clipboard
 import { CopyToClipboard } from "react-copy-to-clipboard";
 // reactstrap components
@@ -28,19 +28,41 @@ import {
   Col,
   UncontrolledTooltip,
   Table,
-  Media, 
+  Media,
   Badge,
   Progress,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownItem,
-  DropdownMenu
+  DropdownMenu,
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
+import axios from "axios";
 
 const History = () => {
   const [copiedText, setCopiedText] = useState();
+  const [history, setHistory] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(
+        "http://localhost:8888/authentification/student/" +
+          JSON.parse(localStorage.getItem("user_data")).userDTO.id +
+          "/payments",
+        {
+          headers: {
+            Authorization:
+              "Bearer " +
+              JSON.parse(localStorage.getItem("user_data")).accessToken,
+          },
+        }
+      )
+      .then((res) => {
+        setHistory(res.data);
+      });
+  }, []);
+
   return (
     <>
       <Header />
@@ -120,288 +142,67 @@ const History = () => {
                     </p>
                   </Col>
                 </Row>
-                <Table className="align-items-center table-flush w-75 mx-auto" responsive>
+                <Table
+                  className="align-items-center table-flush w-75 mx-auto"
+                  responsive
+                >
                   <tbody>
-                    <tr>
-                      <th scope="row">
-                        <Media className="align-items-center">
-                          <Media>
-                            <span className="mb-0 text-sm">
-                              Registration Fees
-                            </span>
+                    {history.map((h) => (
+                      <tr>
+                        <th scope="row">
+                          <Media className="align-items-center">
+                            <Media>
+                              <span className="mb-0 text-sm">
+                                Registration Fees
+                              </span>
+                            </Media>
                           </Media>
-                        </Media>
-                      </th>
-                      <td>
-                        <Badge color="" className="badge-dot mr-4">
-                        <i className="bg-success" />
-                          check
-                        </Badge>
-                      </td>
-                      <td>
-                        20 Mar, 2021
-                      </td>
-                      <td>$2,500 USD</td>
-                    
-                      <td className="text-right">
-                        <UncontrolledDropdown>
-                          <DropdownToggle
-                            className="btn-icon-only text-light"
-                            href="#pablo"
-                            role="button"
-                            size="sm"
-                            color=""
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            <i className="fas fa-ellipsis-v" />
-                          </DropdownToggle>
-                          <DropdownMenu className="dropdown-menu-arrow" right>
-                            <DropdownItem
+                        </th>
+                        <td>
+                          <Badge color="" className="badge-dot mr-4">
+                            <i className="bg-success" />
+                            {h.isValid ? "valid" : "pending"}
+                          </Badge>
+                        </td>
+                        <td> {new Date(h.date).toLocaleString("en-GB")}</td>
+                        <td>{h.montant} DHs</td>
+
+                        <td className="text-right">
+                          <UncontrolledDropdown>
+                            <DropdownToggle
+                              className="btn-icon-only text-light"
                               href="#pablo"
+                              role="button"
+                              size="sm"
+                              color=""
                               onClick={(e) => e.preventDefault()}
                             >
-                              Action
-                            </DropdownItem>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              Another action
-                            </DropdownItem>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              Something else here
-                            </DropdownItem>
-                          </DropdownMenu>
-                        </UncontrolledDropdown>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        <Media className="align-items-center">
-                          <Media>
-                            <span className="mb-0 text-sm">
-                              Registration Fees
-                            </span>
-                          </Media>
-                        </Media>
-                      </th>
-                      <td>
-                        <Badge color="" className="badge-dot mr-4">
-                        <i className="bg-warning" />
-                          Coins
-                        </Badge>
-                      </td>
-                      <td>
-                        20 Mar, 2021
-                      </td>
-                      <td>$2,500 USD</td>
-                    
-                      <td className="text-right">
-                        <UncontrolledDropdown>
-                          <DropdownToggle
-                            className="btn-icon-only text-light"
-                            href="#pablo"
-                            role="button"
-                            size="sm"
-                            color=""
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            <i className="fas fa-ellipsis-v" />
-                          </DropdownToggle>
-                          <DropdownMenu className="dropdown-menu-arrow" right>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              Action
-                            </DropdownItem>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              Another action
-                            </DropdownItem>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              Something else here
-                            </DropdownItem>
-                          </DropdownMenu>
-                        </UncontrolledDropdown>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        <Media className="align-items-center">
-                          <Media>
-                            <span className="mb-0 text-sm">
-                              Registration Fees
-                            </span>
-                          </Media>
-                        </Media>
-                      </th>
-                      <td>
-                        <Badge color="" className="badge-dot mr-4">
-                          <i className="bg-primary" />
-                          Credit Card
-                        </Badge>
-                      </td>
-                      <td>
-                        20 Mar, 2021
-                      </td>
-                      <td>$2,500 USD</td>
-                    
-                      <td className="text-right">
-                        <UncontrolledDropdown>
-                          <DropdownToggle
-                            className="btn-icon-only text-light"
-                            href="#pablo"
-                            role="button"
-                            size="sm"
-                            color=""
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            <i className="fas fa-ellipsis-v" />
-                          </DropdownToggle>
-                          <DropdownMenu className="dropdown-menu-arrow" right>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              Action
-                            </DropdownItem>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              Another action
-                            </DropdownItem>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              Something else here
-                            </DropdownItem>
-                          </DropdownMenu>
-                        </UncontrolledDropdown>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        <Media className="align-items-center">
-                          <Media>
-                            <span className="mb-0 text-sm">
-                              Registration Fees
-                            </span>
-                          </Media>
-                        </Media>
-                      </th>
-                      <td>
-                        <Badge color="" className="badge-dot mr-4">
-                        <i className="bg-primary" />
-                          Credit Card
-                        </Badge>
-                      </td>
-                      <td>
-                        20 Mar, 2021
-                      </td>
-                      <td>$2,500 USD</td>
-                    
-                      <td className="text-right">
-                        <UncontrolledDropdown>
-                          <DropdownToggle
-                            className="btn-icon-only text-light"
-                            href="#pablo"
-                            role="button"
-                            size="sm"
-                            color=""
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            <i className="fas fa-ellipsis-v" />
-                          </DropdownToggle>
-                          <DropdownMenu className="dropdown-menu-arrow" right>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              Action
-                            </DropdownItem>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              Another action
-                            </DropdownItem>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              Something else here
-                            </DropdownItem>
-                          </DropdownMenu>
-                        </UncontrolledDropdown>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        <Media className="align-items-center">
-                          <Media>
-                            <span className="mb-0 text-sm">
-                              Registration Fees
-                            </span>
-                          </Media>
-                        </Media>
-                      </th>
-                      <td>
-                        <Badge color="" className="badge-dot mr-4">
-                        <i className="bg-success" />
-                          check
-                        </Badge>
-                      </td>
-                      <td>
-                        20 Mar, 2021
-                      </td>
-                      <td>$2,500 USD</td>
-                    
-                      <td className="text-right">
-                        <UncontrolledDropdown>
-                          <DropdownToggle
-                            className="btn-icon-only text-light"
-                            href="#pablo"
-                            role="button"
-                            size="sm"
-                            color=""
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            <i className="fas fa-ellipsis-v" />
-                          </DropdownToggle>
-                          <DropdownMenu className="dropdown-menu-arrow" right>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              Action
-                            </DropdownItem>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              Another action
-                            </DropdownItem>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              Something else here
-                            </DropdownItem>
-                          </DropdownMenu>
-                        </UncontrolledDropdown>
-                      </td>
-                    </tr>
+                              <i className="fas fa-ellipsis-v" />
+                            </DropdownToggle>
+                            <DropdownMenu className="dropdown-menu-arrow" right>
+                              <DropdownItem
+                                href="#pablo"
+                                onClick={(e) => e.preventDefault()}
+                              >
+                                Action
+                              </DropdownItem>
+                              <DropdownItem
+                                href="#pablo"
+                                onClick={(e) => e.preventDefault()}
+                              >
+                                Another action
+                              </DropdownItem>
+                              <DropdownItem
+                                href="#pablo"
+                                onClick={(e) => e.preventDefault()}
+                              >
+                                Something else here
+                              </DropdownItem>
+                            </DropdownMenu>
+                          </UncontrolledDropdown>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </Table>
               </CardBody>

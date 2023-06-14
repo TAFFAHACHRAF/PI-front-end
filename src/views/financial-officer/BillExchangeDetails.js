@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // reactstrap components
 import {
@@ -38,8 +38,71 @@ import {
 
 // core components
 import Header from "components/Headers/Header.js";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 const BillExchangeDetails = () => {
+  const location = useLocation();
+  const [payment, setPayments] = useState([]);
+  const [idStudent, setIdStudent] = useState([]);
+  const [student, setStudent] = useState([]);
+  const { id } = location.state;
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8888/payments/payments/" + id, {
+        headers: {
+          Authorization:
+            "Bearer " +
+            JSON.parse(localStorage.getItem("user_data")).accessToken,
+        },
+      })
+      .then((res) => {
+        setPayments(res.data);
+        getStudentData(res.data.idStudent);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const getStudentData = (id) => {
+    axios
+      .get("http://localhost:8888/authentification/student/" + id, {
+        headers: {
+          Authorization:
+            "Bearer " +
+            JSON.parse(localStorage.getItem("user_data")).accessToken,
+        },
+      })
+      .then((res) => {
+        setStudent(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const validate = (id, isValid) => {
+    const cash = {
+      isValid: isValid,
+    };
+    axios
+      .put("http://localhost:8888/payments/cash/validate/" + id, cash, {
+        headers: {
+          Authorization:
+            "Bearer " +
+            JSON.parse(localStorage.getItem("user_data")).accessToken,
+        },
+      })
+      .then((res) => {
+        setPayments(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <Header />
@@ -67,7 +130,8 @@ const BillExchangeDetails = () => {
                         className="text-muted mb-0"
                         style={{ fontSize: "0.8rem" }}
                       >
-                        <b>Abir Laaroussi</b> bill exchange details
+                        <b>{student.firstName + " " + student.lastName}</b> bill
+                        exchange details
                       </p>
                     </div>
 
@@ -78,7 +142,8 @@ const BillExchangeDetails = () => {
                           fontSize: "13px",
                         }}
                       >
-                        <b>Date</b> : 12/02/2023
+                        <b>Date</b> :{" "}
+                        {new Date(payment.date).toLocaleString("en-GB")}
                       </p>
                       <p
                         class="mb-2 text-dark"
@@ -86,7 +151,10 @@ const BillExchangeDetails = () => {
                           fontSize: "13px",
                         }}
                       >
-                        <b>Type de payment : </b> virement bancaire
+                        <b>Type de payment : </b>
+                        {payment.isWithCash ? "Cash" : ""}
+                        {payment.isWithCheque ? "Cheque" : ""}
+                        {payment.isWithTransfer ? "Transfer" : ""}
                       </p>
                       <p
                         class="mb-2 text-dark"
@@ -94,7 +162,7 @@ const BillExchangeDetails = () => {
                           fontSize: "13px",
                         }}
                       >
-                       <b>Montant : </b> 1000DHs
+                        <b>Montant : </b> {payment.montant} DHs
                       </p>
                       <p
                         class="mb-2 text-dark"
@@ -102,9 +170,9 @@ const BillExchangeDetails = () => {
                           fontSize: "13px",
                         }}
                       >
-                        <b>Status : </b> pending
+                        <b>Status : </b> {payment.isValid ? "Valid" : "pending"}
                       </p>
-                      
+
                       <p className="mt-3">
                         <b className="border-bottom">
                           <small>
@@ -160,13 +228,22 @@ const BillExchangeDetails = () => {
                             style={{ minHeight: "200px" }}
                           />
                         </InputGroup>
-                        
                       </FormGroup>
                       <div className="text-center">
-                        <Button className="mt-4" color="success" type="button">
+                        <Button
+                          className="mt-4"
+                          color="success"
+                          type="button"
+                          onClick={() => validate(payment.id, true)}
+                        >
                           Valider
                         </Button>
-                        <Button className="mt-4" color="danger" type="button">
+                        <Button
+                          className="mt-4"
+                          color="danger"
+                          type="button"
+                          onClick={() => validate(payment.id, false)}
+                        >
                           Decliner
                         </Button>
                       </div>

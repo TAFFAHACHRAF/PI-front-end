@@ -15,120 +15,350 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
-
+import { useEffect, useState } from "react";
+// react component that copies the given text inside your clipboard
+import { CopyToClipboard } from "react-copy-to-clipboard";
 // reactstrap components
-import { Card, Container, Row } from "reactstrap";
-
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Container,
+  Row,
+  Col,
+  UncontrolledTooltip,
+} from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const MapWrapper = () => {
-  const mapRef = React.useRef(null);
-  React.useEffect(() => {
-    let google = window.google;
-    let map = mapRef.current;
-    let lat = "40.748817";
-    let lng = "-73.985428";
-    const myLatlng = new google.maps.LatLng(lat, lng);
-    const mapOptions = {
-      zoom: 12,
-      center: myLatlng,
-      scrollwheel: false,
-      zoomControl: true,
-      styles: [
-        {
-          featureType: "administrative",
-          elementType: "labels.text.fill",
-          stylers: [{ color: "#444444" }],
-        },
-        {
-          featureType: "landscape",
-          elementType: "all",
-          stylers: [{ color: "#f2f2f2" }],
-        },
-        {
-          featureType: "poi",
-          elementType: "all",
-          stylers: [{ visibility: "off" }],
-        },
-        {
-          featureType: "road",
-          elementType: "all",
-          stylers: [{ saturation: -100 }, { lightness: 45 }],
-        },
-        {
-          featureType: "road.highway",
-          elementType: "all",
-          stylers: [{ visibility: "simplified" }],
-        },
-        {
-          featureType: "road.arterial",
-          elementType: "labels.icon",
-          stylers: [{ visibility: "off" }],
-        },
-        {
-          featureType: "transit",
-          elementType: "all",
-          stylers: [{ visibility: "off" }],
-        },
-        {
-          featureType: "water",
-          elementType: "all",
-          stylers: [{ color: "#5e72e4" }, { visibility: "on" }],
-        },
-      ],
-    };
+const Classes = () => {
+  const [classes, setClasses] = useState([]);
+  const navigate = useNavigate();
 
-    map = new google.maps.Map(map, mapOptions);
-
-    const marker = new google.maps.Marker({
-      position: myLatlng,
-      map: map,
-      animation: google.maps.Animation.DROP,
-      title: "Light Bootstrap Dashboard PRO React!",
-    });
-
-    const contentString =
-      '<div class="info-window-content"><h2>Light Bootstrap Dashboard PRO React</h2>' +
-      "<p>A premium Admin for React-Bootstrap, Bootstrap, React, and React Hooks.</p></div>";
-
-    const infowindow = new google.maps.InfoWindow({
-      content: contentString,
-    });
-
-    google.maps.event.addListener(marker, "click", function () {
-      infowindow.open(map, marker);
-    });
+  useEffect(() => {
+    axios
+      .get("http://localhost:8888/educations/major/", {
+        headers: {
+          Authorization:
+            "Bearer " +
+            JSON.parse(localStorage.getItem("user_data")).accessToken,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setClasses(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
-  return (
-    <>
-      <div
-        style={{ height: `600px` }}
-        className="map-canvas"
-        id="map-canvas"
-        ref={mapRef}
-      ></div>
-    </>
-  );
-};
 
-const Maps = () => {
+  const goToStudentList = (majorId , major) => {
+    navigate("/financial/studentList" , {state : {
+      id : majorId,
+      major,
+    }});
+  }
+
   return (
     <>
       <Header />
       {/* Page content */}
       <Container className="mt--7" fluid>
+        {/* Table */}
         <Row>
-          <div className="col">
-            <Card className="shadow border-0">
-              <MapWrapper />
+          <div className="col-12">
+            <Card className="shadow">
+              <CardHeader className="bg-transparent">
+                <h3 className="mb-0">Diplôme : Licence d'Université</h3>
+              </CardHeader>
+              <CardBody>
+                <Row className="icon-examples">
+                  {classes.map((classe) => (
+                    <Col lg="6" md="6" key={classe.id} onClick={() => goToStudentList(classe.id , classe.name)}>
+                      <button
+                        className="btn-icon-clipboard"
+                        id="tooltip982655500"
+                        type="button"
+                      >
+                        <div className="d-block">
+                          <p className="mb-0">
+                            <b>Filiere :</b> {" "}
+                            <small>{classe.name}</small>
+                          </p>
+                          <p className="mb-0">
+                            <b>Diplôme</b> :{" "}
+                            <small>{classe?.education?.diploma}</small>
+                          </p>
+                          <p>
+                            <b>Département</b> :{" "}
+                            <small>{classe?.departement?.intitule}</small>
+                          </p>
+                        </div>
+                      </button>
+                    </Col>
+                  ))}
+                </Row>
+              </CardBody>
             </Card>
           </div>
+
+          {/* <div className="col-12">
+            <Card className="shadow">
+              <CardHeader className="bg-transparent">
+                <h3 className="mb-0">Diplôme : Master d'Université</h3>
+              </CardHeader>
+              <CardBody>
+                <Row className="icon-examples">
+                  <Col lg="6" md="6">
+                    <button
+                      className="btn-icon-clipboard"
+                      id="tooltip982655500"
+                      type="button"
+                    >
+                      <div className="d-block">
+                        <p className="mb-0">
+                          <b>CGIF</b> -{" "}
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
+                        </p>
+                        <p className="mb-0">
+                          <b>Diplôme</b> : <small>Master d'Université</small>
+                        </p>
+                        <p>
+                          <b>Département</b> :{" "}
+                          <small>Génie Economie et Gestion</small>
+                        </p>
+                      </div>
+                    </button>
+                  </Col>
+
+                  <Col lg="6" md="6">
+                    <button
+                      className="btn-icon-clipboard"
+                      id="tooltip982655500"
+                      type="button"
+                    >
+                      <div className="d-block">
+                        <p className="mb-0">
+                          <b>CGIF</b> -{" "}
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
+                        </p>
+                        <p className="mb-0">
+                          <b>Diplôme</b> : <small>Master d'Université</small>
+                        </p>
+                        <p>
+                          <b>Département</b> :{" "}
+                          <small>Génie Economie et Gestion</small>
+                        </p>
+                      </div>
+                    </button>
+                  </Col>
+
+                  <Col lg="6" md="6">
+                    <button
+                      className="btn-icon-clipboard"
+                      id="tooltip982655500"
+                      type="button"
+                    >
+                      <div className="d-block">
+                        <p className="mb-0">
+                          <b>CGIF</b> -{" "}
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
+                        </p>
+                        <p className="mb-0">
+                          <b>Diplôme</b> : <small>Master d'Université</small>
+                        </p>
+                        <p>
+                          <b>Département</b> :{" "}
+                          <small>Génie Economie et Gestion</small>
+                        </p>
+                      </div>
+                    </button>
+                  </Col>
+
+                  <Col lg="6" md="6">
+                    <button
+                      className="btn-icon-clipboard"
+                      id="tooltip982655500"
+                      type="button"
+                    >
+                      <div className="d-block">
+                        <p className="mb-0">
+                          <b>CGIF</b> -{" "}
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
+                        </p>
+                        <p className="mb-0">
+                          <b>Diplôme</b> : <small>Master d'Université</small>
+                        </p>
+                        <p>
+                          <b>Département</b> :{" "}
+                          <small>Génie Economie et Gestion</small>
+                        </p>
+                      </div>
+                    </button>
+                  </Col>
+
+                  <Col lg="6" md="6">
+                    <button
+                      className="btn-icon-clipboard"
+                      id="tooltip982655500"
+                      type="button"
+                    >
+                      <div className="d-block">
+                        <p className="mb-0">
+                          <b>CGIF</b> -{" "}
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
+                        </p>
+                        <p className="mb-0">
+                          <b>Diplôme</b> : <small>Master d'Université</small>
+                        </p>
+                        <p>
+                          <b>Département</b> :{" "}
+                          <small>Génie Economie et Gestion</small>
+                        </p>
+                      </div>
+                    </button>
+                  </Col>
+
+                  <Col lg="6" md="6">
+                    <button
+                      className="btn-icon-clipboard"
+                      id="tooltip982655500"
+                      type="button"
+                    >
+                      <div className="d-block">
+                        <p className="mb-0">
+                          <b>CGIF</b> -{" "}
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
+                        </p>
+                        <p className="mb-0">
+                          <b>Diplôme</b> : <small>Master d'Université</small>
+                        </p>
+                        <p>
+                          <b>Département</b> :{" "}
+                          <small>Génie Economie et Gestion</small>
+                        </p>
+                      </div>
+                    </button>
+                  </Col>
+
+                  <Col lg="6" md="6">
+                    <button
+                      className="btn-icon-clipboard"
+                      id="tooltip982655500"
+                      type="button"
+                    >
+                      <div className="d-block">
+                        <p className="mb-0">
+                          <b>CGIF</b> -{" "}
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
+                        </p>
+                        <p className="mb-0">
+                          <b>Diplôme</b> : <small>Master d'Université</small>
+                        </p>
+                        <p>
+                          <b>Département</b> :{" "}
+                          <small>Génie Economie et Gestion</small>
+                        </p>
+                      </div>
+                    </button>
+                  </Col>
+
+                  <Col lg="6" md="6">
+                    <button
+                      className="btn-icon-clipboard"
+                      id="tooltip982655500"
+                      type="button"
+                    >
+                      <div className="d-block">
+                        <p className="mb-0">
+                          <b>CGIF</b> -{" "}
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
+                        </p>
+                        <p className="mb-0">
+                          <b>Diplôme</b> : <small>Master d'Université</small>
+                        </p>
+                        <p>
+                          <b>Département</b> :{" "}
+                          <small>Génie Economie et Gestion</small>
+                        </p>
+                      </div>
+                    </button>
+                  </Col>
+
+                  <Col lg="6" md="6">
+                    <button
+                      className="btn-icon-clipboard"
+                      id="tooltip982655500"
+                      type="button"
+                    >
+                      <div className="d-block">
+                        <p className="mb-0">
+                          <b>CGIF</b> -{" "}
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
+                        </p>
+                        <p className="mb-0">
+                          <b>Diplôme</b> : <small>Master d'Université</small>
+                        </p>
+                        <p>
+                          <b>Département</b> :{" "}
+                          <small>Génie Economie et Gestion</small>
+                        </p>
+                      </div>
+                    </button>
+                  </Col>
+
+                  <Col lg="6" md="6">
+                    <button
+                      className="btn-icon-clipboard"
+                      id="tooltip982655500"
+                      type="button"
+                    >
+                      <div className="d-block">
+                        <p className="mb-0">
+                          <b>CGIF</b> -{" "}
+                          <small>
+                            Contrôle de Gestion et Ingénierie Financière
+                          </small>
+                        </p>
+                        <p className="mb-0">
+                          <b>Diplôme</b> : <small>Master d'Université</small>
+                        </p>
+                        <p>
+                          <b>Département</b> :{" "}
+                          <small>Génie Economie et Gestion</small>
+                        </p>
+                      </div>
+                    </button>
+                  </Col>
+                </Row>
+              </CardBody>
+            </Card>
+          </div> */}
         </Row>
       </Container>
     </>
   );
 };
 
-export default Maps;
+export default Classes;

@@ -46,6 +46,7 @@ var routes = [
     icon: "fa-solid fa-plus text-orange",
     component: <Maps />,
     layout: "/admin",
+    hide : true
   },
   {
     path: "/user-profile",
@@ -55,11 +56,12 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/sutdentsList",
+    path: "/studentsList",
     name: "SutdentsList",
     icon: "fa-solid fa-list text-red",
     component: <Tables />,
     layout: "/admin",
+    hide : true
   },
   {
     path: "/studentData",
