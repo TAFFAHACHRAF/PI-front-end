@@ -38,12 +38,16 @@ import UploadArea from "./UploadArea";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Payment = () => {
   const [isTransfer, setIsTransfer] = useState(false);
   const [type, setType] = useState("");
   const [prosess, setProsess] = useState("");
   const [montant, setMontant] = useState("");
+
+  const notify = () => toast("Paiment added successfully !");
 
   useEffect(() => {
     console.log(localStorage.getItem("idStudent"));
@@ -81,6 +85,7 @@ const Payment = () => {
       })
       .then((res) => {
         console.log(res.data);
+        notify()
       })
       .catch((err) => {
         console.log(err);
@@ -109,6 +114,8 @@ const Payment = () => {
                   }}
                   onSubmit={(e) => handleSubmit(e)}
                 >
+                  {/* notify */}
+                  <ToastContainer />
                   <FormGroup>
                     <Input
                       id="exampleSelect"

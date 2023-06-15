@@ -46,7 +46,7 @@ root.render(
       <Route path="/deputy/*" element={<DeputyLayout />} />	
       <Route path="/it/*" element={<ITLayout />} />
       <Route path="/director/*" element={<DirectorLayout />} />
-      <Route path="*" element={<Navigate to="/admin/index" replace />} />
+      <Route path="*" element={<Navigate to="/auth/login" replace />} />
     </Routes>
   </BrowserRouter>
 );

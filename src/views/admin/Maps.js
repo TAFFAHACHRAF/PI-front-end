@@ -15,8 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 // reactstrap components
 import {
@@ -39,29 +38,59 @@ import {
 // core components
 import Header from "components/Headers/Header.js";
 import UploadArea from "./UploadArea";
-import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Maps = () => {
-  // const location = useLocation();
-  // const { id, students, classes } = location.state;
-  // const [idMajorOfStudent, setIdMajorOfStudent] = useState([]);
-  // const [studentData, setStudentData] = useState({
-  //   firstName: "",
-  //   lastName: "",
-  //   address: "",
-  //   email: "",
-  //   username: "",
-  //   phone: "",
-  //   cne: "",
-  //   cni: "",
-  //   username: "",
-  //   dateNaissance: "",
-  //   role: "STUDENT",
-  //   nationality: "",
-  // });
-  // const []
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [cne, setCne] = useState("");
+  const [cni, setCni] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [adresse, setAdresse] = useState("");
+  const [username, setUsername] = useState("");
+  const [gender, setGender] = useState("");
+  const [role, setRole] = useState("student");
 
-  const getClasses = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let dataTest = {
+      firstName,
+      lastName,
+      cne,
+      cni,
+      email,
+      phone,
+      adresse,
+      username,
+      gender: gender.toUpperCase(),
+      role: role.toUpperCase(),
+      nationality: "Moroccan",
+      password: "1234",
+      idMajorOfStudent:1 ,
+      idEducationOfStudent:  1,
+      idHeadOfDepartementManagerOfStudent: JSON.parse(localStorage.getItem("user_data")).userDTO.id,
+      idMajorOfHeadOfDepartement:  null,
+      dateNaissance: "1998-12-12",
+    };
+
+    axios
+      .post("http://localhost:8888/authentification/student", dataTest, {
+        headers: {
+          Authorization:
+            "Bearer " +
+            JSON.parse(localStorage.getItem("user_data")).accessToken,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        toast("Student added successfully !");
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <>
@@ -72,8 +101,9 @@ const Maps = () => {
           <div className="col">
             <Card className="shadow border-0">
               <CardHeader className="bg-transparent">
-                <h3 className="mb-0">add student :</h3>
+                <h3 className="mb-0">add Student :</h3>
               </CardHeader>
+              <ToastContainer />
               <CardBody>
                 <Row>
                   <Col lg="6" md="6" className="border-right position-relative">
@@ -82,7 +112,7 @@ const Maps = () => {
                         <div className="text-center text-muted mb-4">
                           <small>Students information</small>
                         </div>
-                        <Form role="form">
+                        <Form role="form" onSubmit={(e) => handleSubmit(e)}>
                           <FormGroup>
                             <InputGroup className="input-group-alternative mb-3">
                               <InputGroupAddon addonType="prepend">
@@ -91,9 +121,10 @@ const Maps = () => {
                                 </InputGroupText>
                               </InputGroupAddon>
                               <Input
-                                placeholder="firstname"
-                                type="text"
+                                placeholder="firstName"
+                                onChange={(e) => setFirstName(e.target.value)}
                                 name="firstName"
+                                type="text"
                               />
                             </InputGroup>
                           </FormGroup>
@@ -106,8 +137,9 @@ const Maps = () => {
                               </InputGroupAddon>
                               <Input
                                 placeholder="lastname"
-                                type="text"
                                 name="lastName"
+                                type="text"
+                                onChange={(e) => setLastName(e.target.value)}
                               />
                             </InputGroup>
                           </FormGroup>
@@ -123,6 +155,7 @@ const Maps = () => {
                                 type="email"
                                 autoComplete="new-email"
                                 name="email"
+                                onChange={(e) => setEmail(e.target.value)}
                               />
                             </InputGroup>
                           </FormGroup>
@@ -136,8 +169,9 @@ const Maps = () => {
                               <Input
                                 placeholder="telephone"
                                 type="tel"
-                                autoComplete="telephone"
                                 name="phone"
+                                autoComplete="telephone"
+                                onChange={(e) => setPhone(e.target.value)}
                               />
                             </InputGroup>
                           </FormGroup>
@@ -153,6 +187,7 @@ const Maps = () => {
                                 type="text"
                                 autoComplete="address"
                                 name="adresse"
+                                onChange={(e) => setAdresse(e.target.value)}
                               />
                             </InputGroup>
                           </FormGroup>
@@ -168,6 +203,7 @@ const Maps = () => {
                                 type="text"
                                 autoComplete="cne"
                                 name="cne"
+                                onChange={(e) => setCne(e.target.value)}
                               />
                             </InputGroup>
                           </FormGroup>
@@ -183,6 +219,7 @@ const Maps = () => {
                                 type="text"
                                 autoComplete="cni"
                                 name="cni"
+                                onChange={(e) => setCni(e.target.value)}
                               />
                             </InputGroup>
                           </FormGroup>
@@ -198,6 +235,7 @@ const Maps = () => {
                                 type="text"
                                 autoComplete="username"
                                 name="username"
+                                onChange={(e) => setUsername(e.target.value)}
                               />
                             </InputGroup>
                           </FormGroup>
@@ -206,9 +244,10 @@ const Maps = () => {
                               id="exampleSelect"
                               name="gender"
                               type="select"
+                              onChange={(e) => setGender(e.target.value)}
                             >
-                              <option value="Male">Male</option>
-                              <option value="Female">Female</option>
+                              <option value="MALE">Male</option>
+                              <option value="FEMALE">Female</option>
                             </Input>
                           </FormGroup>
                           <FormGroup>
@@ -218,18 +257,14 @@ const Maps = () => {
                                   <i className="ni ni-lock-circle-open" />
                                 </InputGroupText>
                               </InputGroupAddon>
-                              <Input
-                                placeholder="date"
-                                type="date"
-                                name="dateNaissance"
-                              />
+                              <Input placeholder="Telephone" type="tel" />
                             </InputGroup>
                           </FormGroup>
                           <div className="text-center">
                             <Button
                               className="mt-4"
                               color="primary"
-                              type="button"
+                              type="submit"
                             >
                               Add student
                             </Button>

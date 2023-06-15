@@ -43,14 +43,6 @@ var routes = [
     hide: true
   },
   {
-    path: "/addStudent",
-    name: "Add students",
-    icon: "fa-solid fa-plus text-red",
-    component: <Maps />,
-    layout: "/it",
-    hide: true
-  },
-  {
     path: "/classes",
     name: "Classes",
     icon: "fa-solid fa-link text-yellow",
@@ -65,8 +57,15 @@ var routes = [
     layout: "/it",
   },
   {
+    path: "/addStudent",
+    name: "manage users",
+    icon: "fa-solid fa-plus text-red",
+    component: <Maps />,
+    layout: "/it",
+  },
+  {
     path: "/addClass",
-    name: "AddClass",
+    name: "Manage classes",
     icon: "fa-solid fa-graduation-cap",
     component: <AddClass />,
     layout: "/it",

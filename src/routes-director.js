@@ -16,25 +16,18 @@
 
 */
 
-import Index from "views/student/Index.js";
-import Tables from "views/admin/Tables";
-import Classes from "views/admin/Classes";
+import Tables from "views/general-director/Tables";
+import Classes from "views/general-director/Classes";
 import Diploma from "views/general-director/Diploma";
 
 var routes = [
-  // {
-  //   path: "/index",
-  //   name: "Dashboard",
-  //   icon: "ni ni-tv-2 text-primary",
-  //   component: <Index />,
-  //   layout: "/director",
-  // },
   {
     path: "/studentList",
     name: "students",
     icon: "fa-sharp fa-solid fa-graduation-cap text-blue",
     component: <Tables />,
     layout: "/director",
+    hide: true
   },
   {
     path: "/classes",

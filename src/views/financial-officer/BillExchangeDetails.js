@@ -40,6 +40,8 @@ import {
 import Header from "components/Headers/Header.js";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BillExchangeDetails = () => {
   const location = useLocation();
@@ -47,6 +49,8 @@ const BillExchangeDetails = () => {
   const [idStudent, setIdStudent] = useState([]);
   const [student, setStudent] = useState([]);
   const { id } = location.state;
+
+  // const notify = () => toast("Paiment added successfully !");
 
   useEffect(() => {
     axios
@@ -96,6 +100,11 @@ const BillExchangeDetails = () => {
         },
       })
       .then((res) => {
+        if (isValid == false) {
+          toast.error("Paiment is declined !")
+        } else {
+          toast("Paiment is validated!")
+        }
         setPayments(res.data);
       })
       .catch((err) => {
@@ -114,6 +123,8 @@ const BillExchangeDetails = () => {
               <CardHeader className="bg-transparent">
                 <h3 className="mb-0">Bill of exchange details:</h3>
               </CardHeader>
+              {/* notify */}
+              <ToastContainer />
               <CardBody>
                 <Row>
                   <Col lg="6">
@@ -205,7 +216,7 @@ const BillExchangeDetails = () => {
                       </p>
                     </div>
                     <Form role="form" className="mt-5">
-                      <FormGroup>
+                      {/* <FormGroup>
                         <InputGroup className="input-group-alternative mb-3">
                           <InputGroupAddon addonType="prepend">
                             <InputGroupText>
@@ -228,7 +239,7 @@ const BillExchangeDetails = () => {
                             style={{ minHeight: "200px" }}
                           />
                         </InputGroup>
-                      </FormGroup>
+                      </FormGroup> */}
                       <div className="text-center">
                         <Button
                           className="mt-4"

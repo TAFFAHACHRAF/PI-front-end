@@ -160,7 +160,7 @@ const History = () => {
                         </th>
                         <td>
                           <Badge color="" className="badge-dot mr-4">
-                            <i className="bg-success" />
+                            <i className={h.isValid ? "bg-success" : "bg-orange"} />
                             {h.isValid ? "valid" : "pending"}
                           </Badge>
                         </td>

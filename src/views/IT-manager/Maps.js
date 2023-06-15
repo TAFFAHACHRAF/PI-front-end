@@ -38,8 +38,60 @@ import {
 // core components
 import Header from "components/Headers/Header.js";
 import UploadArea from "./UploadArea";
+import { useState } from "react";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Maps = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [cne, setCne] = useState("");
+  const [cni, setCni] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [adresse, setAdresse] = useState("");
+  const [username, setUsername] = useState("");
+  const [gender, setGender] = useState("");
+  const [role, setRole] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let dataTest = {
+      firstName,
+      lastName,
+      cne,
+      cni,
+      email,
+      phone,
+      adresse,
+      username,
+      gender: gender.toUpperCase(),
+      role: role.toUpperCase(),
+      nationality: "Moroccan",
+      password: "1234",
+      idMajorOfStudent: role == "student" ? 1 : null,
+      idEducationOfStudent: role == "student" ? 1 : null,
+      idHeadOfDepartementManagerOfStudent: role == "student" ? 4 : null,
+      idMajorOfHeadOfDepartement: role == "head_of_departement" ? 1 : null,
+      dateNaissance: "1998-12-12",
+    };
+
+    axios
+      .post("http://localhost:8888/authentification/" + role, dataTest, {
+        headers: {
+          Authorization:
+            "Bearer " +
+            JSON.parse(localStorage.getItem("user_data")).accessToken,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        toast(role + " added successfully !");
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <Header />
@@ -49,9 +101,11 @@ const Maps = () => {
           <div className="col">
             <Card className="shadow border-0">
               <CardHeader className="bg-transparent">
-                <h3 className="mb-0">add student :</h3>
+                <h3 className="mb-0">add {role} :</h3>
               </CardHeader>
               <CardBody>
+                {/* notify */}
+                <ToastContainer />
                 <Row>
                   <Col lg="6" md="6" className="border-right position-relative">
                     <Card className="border-0">
@@ -59,7 +113,32 @@ const Maps = () => {
                         <div className="text-center text-muted mb-4">
                           <small>Students information</small>
                         </div>
-                        <Form role="form">
+                        <Form role="form" onSubmit={(e) => handleSubmit(e)}>
+                          <FormGroup>
+                            <Input
+                              id="exampleSelect"
+                              name="role"
+                              type="select"
+                              required
+                              onChange={(e) => setRole(e.target.value)}
+                            >
+                              <option value="student">student</option>
+                              <option value="schooling">schooling</option>
+                              <option value="it_manager">it_manager</option>
+                              <option value="head_of_departement">
+                                head_of_departement
+                              </option>
+                              <option value="general_director">
+                                general_director
+                              </option>
+                              <option value="financial_officier">
+                                financial_officier
+                              </option>
+                              <option value="deputy_manager">
+                                deputy_manager
+                              </option>
+                            </Input>
+                          </FormGroup>
                           <FormGroup>
                             <InputGroup className="input-group-alternative mb-3">
                               <InputGroupAddon addonType="prepend">
@@ -67,7 +146,13 @@ const Maps = () => {
                                   <i className="ni ni-hat-3" />
                                 </InputGroupText>
                               </InputGroupAddon>
-                              <Input placeholder="firstname" type="text" />
+                              <Input
+                                placeholder="firstName"
+                                onChange={(e) => setFirstName(e.target.value)}
+                                name="firstName"
+                                type="text"
+                                required
+                              />
                             </InputGroup>
                           </FormGroup>
                           <FormGroup>
@@ -77,7 +162,13 @@ const Maps = () => {
                                   <i className="ni ni-hat-3" />
                                 </InputGroupText>
                               </InputGroupAddon>
-                              <Input placeholder="lastname" type="text" />
+                              <Input
+                                placeholder="lastname"
+                                name="lastName"
+                                type="text"
+                                required
+                                onChange={(e) => setLastName(e.target.value)}
+                              />
                             </InputGroup>
                           </FormGroup>
                           <FormGroup>
@@ -92,6 +183,8 @@ const Maps = () => {
                                 type="email"
                                 autoComplete="new-email"
                                 name="email"
+                                required
+                                onChange={(e) => setEmail(e.target.value)}
                               />
                             </InputGroup>
                           </FormGroup>
@@ -105,7 +198,10 @@ const Maps = () => {
                               <Input
                                 placeholder="telephone"
                                 type="tel"
+                                name="phone"
                                 autoComplete="telephone"
+                                required
+                                onChange={(e) => setPhone(e.target.value)}
                               />
                             </InputGroup>
                           </FormGroup>
@@ -120,6 +216,9 @@ const Maps = () => {
                                 placeholder="address"
                                 type="text"
                                 autoComplete="address"
+                                name="adresse"
+                                required
+                                onChange={(e) => setAdresse(e.target.value)}
                               />
                             </InputGroup>
                           </FormGroup>
@@ -134,6 +233,9 @@ const Maps = () => {
                                 placeholder="cne"
                                 type="text"
                                 autoComplete="cne"
+                                name="cne"
+                                required
+                                onChange={(e) => setCne(e.target.value)}
                               />
                             </InputGroup>
                           </FormGroup>
@@ -148,6 +250,9 @@ const Maps = () => {
                                 placeholder="cni"
                                 type="text"
                                 autoComplete="cni"
+                                name="cni"
+                                required
+                                onChange={(e) => setCni(e.target.value)}
                               />
                             </InputGroup>
                           </FormGroup>
@@ -162,6 +267,9 @@ const Maps = () => {
                                 placeholder="username"
                                 type="text"
                                 autoComplete="username"
+                                name="username"
+                                required
+                                onChange={(e) => setUsername(e.target.value)}
                               />
                             </InputGroup>
                           </FormGroup>
@@ -170,9 +278,11 @@ const Maps = () => {
                               id="exampleSelect"
                               name="gender"
                               type="select"
+                              required
+                              onChange={(e) => setGender(e.target.value)}
                             >
-                              <option>Male</option>
-                              <option>Female</option>
+                              <option value="MALE">Male</option>
+                              <option value="FEMALE">Female</option>
                             </Input>
                           </FormGroup>
                           <FormGroup>
@@ -182,14 +292,14 @@ const Maps = () => {
                                   <i className="ni ni-lock-circle-open" />
                                 </InputGroupText>
                               </InputGroupAddon>
-                              <Input placeholder="Telephone" type="tel" />
+                              <Input placeholder="Telephone" type="tel" required />
                             </InputGroup>
                           </FormGroup>
                           <div className="text-center">
                             <Button
                               className="mt-4"
                               color="primary"
-                              type="button"
+                              type="submit"
                             >
                               Add student
                             </Button>
@@ -207,7 +317,9 @@ const Maps = () => {
                         backgroundColor: "#fff",
                         borderRadius: "50%",
                       }}
-                    ><b>OR</b></p>
+                    >
+                      <b>OR</b>
+                    </p>
                   </Col>
                   <Col lg="6" md="6" className="pt-3">
                     <div className="d-flex">

@@ -39,7 +39,7 @@ const StudentList = () => {
   
     useEffect(() => {
       axios
-        .get("http://localhost:8888/authentification/student/major/1", {
+        .get("http://localhost:8888/authentification/student/major/" + id, {
           headers: {
             Authorization:
               "Bearer " +

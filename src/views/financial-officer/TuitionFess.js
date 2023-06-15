@@ -48,7 +48,7 @@ const TuitionFess = () => {
   const [formationId, setFormationId] = useState();
   const [payments, setPayments] = useState([]);
   const [students, setStudents] = useState([]);
-  const [year, setYear] = useState([]);
+  const [year, setYear] = useState(2023);
 
   useEffect(() => {
     axios
@@ -60,7 +60,7 @@ const TuitionFess = () => {
         },
       })
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
         setFormatins(res.data);
       })
       .catch((err) => console.log(err));
@@ -70,7 +70,10 @@ const TuitionFess = () => {
     e.preventDefault();
     axios
       .get(
-        "http://localhost:8888/payments/education/" + formationId + "/payments/"+year,
+        "http://localhost:8888/payments/education/" +
+          formationId +
+          "/payments/" +
+          year,
         {
           headers: {
             Authorization:
@@ -98,7 +101,7 @@ const TuitionFess = () => {
         },
       })
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
         setStudents((prev) => [
           ...prev,
           res.data.firstName + " " + res.data.lastName,
@@ -149,19 +152,27 @@ const TuitionFess = () => {
                       onChange={(e) => setYear(e.target.value)}
                       type="select"
                     >
-                     <option value="2024">2023</option>
+                      <option selected value="2024">
+                        2023
+                      </option>
                     </Input>
                   </FormGroup>
                   <div className="text-center">
-                    <Button color="primary" type="submit">
-                      Search students
-                    </Button>
+                    {formationId != undefined ? (
+                      <Button color="primary" type="submit">
+                        Search students
+                      </Button>
+                    ) : (
+                      <Button color="primary" type="submit" disabled>
+                        Search students
+                      </Button>
+                    )}
                   </div>
                 </Form>
               </CardHeader>
               <CardBody>
                 <Row className="icon-examples">
-                  {payments.map((payment , index) => (
+                  {payments.map((payment, index) => (
                     <Col lg="6" md="6" className="mb-3">
                       <div
                         style={{ backgroundColor: "rgb(248, 249, 250)" }}
@@ -182,7 +193,9 @@ const TuitionFess = () => {
                         </p>
                         <hr className="mt-0 mb-0" />
                         <p className="text-center mt-2 mb-0">
-                          <b>{new Date(payment.date).toLocaleString("en-GB")}</b>
+                          <b>
+                            {new Date(payment.date).toLocaleString("en-GB")}
+                          </b>
                         </p>
                         <hr className="mt-0 mb-0" />
                         <div className="d-flex justify-content-center flex-column align-items-center px-5 pt-4">
@@ -197,7 +210,7 @@ const TuitionFess = () => {
                                 fontWeight: "500",
                               }}
                             >
-                             {payment.montant} DHs
+                              {payment.montant} DHs
                             </p>
                           </div>
                           <div>

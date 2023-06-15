@@ -16,17 +16,20 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    username: "hod1",
-    password: "hod1@",
+    username: "",
+    password: "",
     grantType: "password",
   });
 
-  useEffect(() =>{
-     axios.post("http://localhost:8888/authentification/token", formData)
+  const handleSubmit = () => {
+    axios
+      .post("http://localhost:8888/authentification/token", formData)
       .then((res) => {
         const role = res.data.userDTO.roleDTOList[0].name.split("_");
 
@@ -52,13 +55,13 @@ const Login = () => {
       .catch((err) => {
         console.log(err);
       });
-
-      
-  }, []);
+  };
 
   return (
     <>
       <Col lg="5" md="7">
+        {/* notify */}
+        <ToastContainer />
         <Card className="bg-secondary shadow border-0">
           <CardBody className="px-lg-5 py-lg-5">
             <Form role="form">
@@ -71,8 +74,12 @@ const Login = () => {
                   </InputGroupAddon>
                   <Input
                     placeholder="Email"
-                    type="email"
+                    type="username"
                     autoComplete="new-email"
+                    onChange={(e) =>
+                      setFormData({ ...formData, username: e.target.value })
+                    }
+                    required
                   />
                 </InputGroup>
               </FormGroup>
@@ -87,6 +94,10 @@ const Login = () => {
                     placeholder="Password"
                     type="password"
                     autoComplete="new-password"
+                    onChange={(e) =>
+                      setFormData({ ...formData, password: e.target.value })
+                    }
+                    required
                   />
                 </InputGroup>
               </FormGroup>
@@ -104,7 +115,12 @@ const Login = () => {
                 </label>
               </div>
               <div className="text-center">
-                <Button className="my-4" color="primary" type="button">
+                <Button
+                  className="my-4"
+                  color="primary"
+                  type="button"
+                  onClick={handleSubmit}
+                >
                   Sign in
                 </Button>
               </div>

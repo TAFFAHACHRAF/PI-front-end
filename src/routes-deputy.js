@@ -36,6 +36,7 @@ var routes = [
     icon: "fa-sharp fa-solid fa-graduation-cap text-blue",
     component: <StudentList />,
     layout: "/deputy",
+    hide: true
   },
   {
     path: "/classes",

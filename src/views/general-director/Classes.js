@@ -56,7 +56,7 @@ const Classes = () => {
   }, []);
 
   const goToStudentList = (majorId , major) => {
-    navigate("/deputy/studentList" , {state : {
+    navigate("/director/studentList" , {state : {
       id : majorId,
       major,
       classes

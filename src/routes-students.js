@@ -22,15 +22,11 @@ import Account from "views/student/Account.js";
 import Payment from "views/student/Payment.js";
 import Icons from "views/student/History.js";
 import BillOfExchange from "views/student/BillOfExchange";
+import Notifications from "views/student/Notifications";
+import NotificationDetail from "views/student/NotificationDetail";
 
 var routes = [
-  // {
-  //   path: "/index",
-  //   name: "Dashboard",
-  //   icon: "ni ni-tv-2 text-primary",
-  //   component: <Index />,
-  //   layout: "/student",
-  // },
+
   {
     path: "/history",
     name: "hisotry",
@@ -58,6 +54,21 @@ var routes = [
     icon: "ni ni-bullet-list-67 text-red",
     component: <Payment />,
     layout: "/student",
+  },
+  {
+    path: "/notifications",
+    name: "notifications",
+    icon: "fa-sharp fa-solid fa-bell",
+    component: <Notifications />,
+    layout: "/student",
+  },
+  {
+    path: "/notificarionsDetails",
+    name: "notifications details",
+    icon: "fa-sharp fa-solid fa-bell",
+    component: <NotificationDetail />,
+    layout: "/student",
+    hide: true
   },
   // {
   //   path: "/billofexchange",

@@ -89,7 +89,7 @@ const Director = (props) => {
           {getRoutes(routes)}
           <Route
             path="*"
-            element={<Navigate to="/director/studentList" replace />}
+            element={<Navigate to="/director/classes" replace />}
           />
         </Routes>
         <Container fluid>

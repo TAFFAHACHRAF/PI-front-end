@@ -24,13 +24,60 @@ import {
   Container,
   Row,
   CardBody,
-  Form, FormGroup, InputGroup, InputGroupAddon, Input, InputGroupText, Button
+  Form,
+  FormGroup,
+  InputGroup,
+  InputGroupAddon,
+  Input,
+  InputGroupText,
+  Button,
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
 import UploadArea from "./UploadArea";
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const Tables = () => {
+const Payment = () => {
+  const [isTransfer, setIsTransfer] = useState(false);
+  const [type, setType] = useState("transfer");
+  const [prosess, setProsess] = useState("");
+  const [montant, setMontant] = useState("");
+
+  useEffect(() => {
+    console.log(localStorage.getItem("idStudent"));
+    console.log(localStorage.getItem("idEducationOfStudent"));
+  });
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const payment = {
+      montant: Number(montant),
+      idStudent: Number(localStorage.getItem("idStudent")),
+      idContinuingEducation: Number(
+        localStorage.getItem("idEducationOfStudent")
+      ),
+      paymentProcess: prosess,
+    };
+
+    axios
+      .post("http://localhost:8888/payments/" + type, payment, {
+        headers: {
+          Authorization:
+            "Bearer " +
+            JSON.parse(localStorage.getItem("user_data")).accessToken,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <Header />
@@ -44,57 +91,47 @@ const Tables = () => {
                 <h3 className="mb-0">payment verification</h3>
               </CardHeader>
               <CardBody>
-                <UploadArea />
-                <Form role="form"
+                 <UploadArea /> 
+                <Form
+                  role="form"
                   style={{
-                     width: "60%",
-                     margin: "15px auto"
+                    width: "60%",
+                    margin: "15px auto",
                   }}
+                  onSubmit={(e) => handleSubmit(e)}
                 >
                   <FormGroup>
-                    <InputGroup className="input-group-alternative mb-3">
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <i className="ni ni-hat-3" />
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Input placeholder="Recipient" type="text" />
-                    </InputGroup>
+                    <Input
+                      id="exampleSelect"
+                      name="prosess"
+                      type="select"
+                      onChange={(e) => setProsess(e.target.value)}
+                    >
+                      <option value="TRAITE_TRIMESTER">TRAITE_TRIMESTER</option>
+                      <option value="TRAITE_SEMESTER">TRAITE_SEMESTER</option>
+                      <option value="NORMAL" selected>
+                        NORMAL
+                      </option>
+                    </Input>
                   </FormGroup>
                   <FormGroup>
                     <InputGroup className="input-group-alternative mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="ni ni-hat-3" />
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Input placeholder="Subject" type="text" />
-                    </InputGroup>
-                  </FormGroup>
-                  <FormGroup>
-                          <Input id="exampleSelect" name="select" type="select">
-                            <option>Type of payment</option>
-                            <option>Bank transfer</option>
-                            <option>Bill of exchange</option>
-                            <option>Check</option>
-                          </Input>
-                        </FormGroup>
-                  <FormGroup>
-                    <InputGroup className="input-group-alternative mb-3">
-                      <InputGroupAddon>
-                        <InputGroupText>
-                          <i className="ni ni-email-83" />
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input
-                        placeholder="Message"
-                        type="textarea"
-                        style={{ minHeight: "200px" }}
+                        placeholder="montant"
+                        onChange={(e) => setMontant(e.target.value)}
+                        name="montant"
+                        type="number"
+                        required
                       />
                     </InputGroup>
                   </FormGroup>
                   <div className="text-center">
-                    <Button className="mt-4" color="primary" type="button">
+                    <Button className="mt-4" color="primary" type="submit">
                       submit payment
                     </Button>
                   </div>
@@ -108,4 +145,4 @@ const Tables = () => {
   );
 };
 
-export default Tables;
+export default Payment;

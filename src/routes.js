@@ -90,6 +90,7 @@ var routes = [
     icon: "ni ni-key-25 text-info",
     component: <Login />,
     layout: "/auth",
+    hide : true
   },
   {
     path: "/register",
@@ -97,6 +98,7 @@ var routes = [
     icon: "ni ni-circle-08 text-pink",
     component: <Register />,
     layout: "/auth",
+    hide : true
   },
 ];
 export default routes;

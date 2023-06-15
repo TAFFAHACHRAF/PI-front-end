@@ -30,12 +30,88 @@ import {
   Pagination,
   PaginationItem,
   PaginationLink,
-  Form, FormGroup, Input, Button
+  Form,
+  FormGroup,
+  Input,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup,
+  Button,
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
+import axios from "axios";
+import { useEffect } from "react";
 
-const StudentData = () => {
+const TuitionFess = () => {
+  const [fomation, setFormatins] = useState([]);
+  const [formationId, setFormationId] = useState();
+  const [payments, setPayments] = useState([]);
+  const [students, setStudents] = useState([]);
+  const [year, setYear] = useState(2023);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8888/educations/continuing/", {
+        headers: {
+          Authorization:
+            "Bearer " +
+            JSON.parse(localStorage.getItem("user_data")).accessToken,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setFormatins(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .get(
+        "http://localhost:8888/payments/education/" +
+          formationId +
+          "/payments/" +
+          year,
+        {
+          headers: {
+            Authorization:
+              "Bearer " +
+              JSON.parse(localStorage.getItem("user_data")).accessToken,
+          },
+        }
+      )
+      .then((res) => {
+        setPayments(res.data);
+        res.data.map((payment) => {
+          getStudentData(payment.idStudent);
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const getStudentData = (id) => {
+    axios
+      .get("http://localhost:8888/authentification/student/" + id, {
+        headers: {
+          Authorization:
+            "Bearer " +
+            JSON.parse(localStorage.getItem("user_data")).accessToken,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setStudents((prev) => [
+          ...prev,
+          res.data.firstName + " " + res.data.lastName,
+        ]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <Header />
@@ -52,421 +128,106 @@ const StudentData = () => {
                   style={{
                     width: "60%",
                   }}
-                  className="d-flex justify-content-end"
+                  className="d-flex justify-content-between"
+                  onSubmit={(e) => handleSubmit(e)}
                 >
-                  <FormGroup className="mb-0 mr-3">
-                    <Input id="exampleSelect" name="select" type="select">
-                      <option>Classes</option>
-                      <option>Bank transfer</option>
-                      <option>Bill of exchange</option>
-                      <option>Check</option>
+                  <FormGroup className="mb-0">
+                    <Input
+                      id="exampleSelect"
+                      name="select"
+                      onChange={(e) => setFormationId(e.target.value)}
+                      type="select"
+                      required
+                    >
+                      {fomation.map((formation) => (
+                        <option value={formation.id}>
+                          {formation.description}
+                        </option>
+                      ))}
+                    </Input>
+                  </FormGroup>
+                  <FormGroup className="mb-0">
+                    <Input
+                      id="exampleSelect"
+                      name="select"
+                      onChange={(e) => setYear(e.target.value)}
+                      type="select"
+                      required
+                    >
+                      <option value="2024">2023</option>
                     </Input>
                   </FormGroup>
                   <div className="text-center">
-                    <Button color="primary" type="button">
-                      Search students
-                    </Button>
+                    {formationId != undefined ? (
+                      <Button color="primary" type="submit">
+                        Search students
+                      </Button>
+                    ) : (
+                      <Button color="primary" type="submit" disabled>
+                        Search students
+                      </Button>
+                    )}
                   </div>
                 </Form>
               </CardHeader>
               <CardBody>
                 <Row className="icon-examples">
-                  <Col lg="6" md="6">
-                    <div
-                      style={{ backgroundColor: "rgb(248, 249, 250)" }}
-                      className="p-2 border border-2"
-                    >
-                      <img
-                        src={require("assets/img/payment/abir.png")}
-                        className="d-block mx-auto"
-                        style={{ width: "50px" }}
-                      />
-                      <p className="text-center mb-0">
-                        <small>
-                          <b>Abir Laaroussi</b>
-                        </small>
-                      </p>
-                      <p className="text-center mb-0">
-                        <small>2 ème année master en XXXXX</small>
-                      </p>
-                      <hr className="mt-0 mb-0" />
-                      <p className="text-center mt-2 mb-0">ID</p>
-                      <p
-                        style={{
-                          backgroundColor: "#dd9a63",
-                          width: "fit-content",
-                          padding: "2px 10px",
-                          borderRadius: "5px",
-                          color: "black",
-                          fontWeight: "500",
-                          margin: "0 auto",
-                        }}
+                  {payments.map((payment, index) => (
+                    <Col lg="6" md="6" className="mb-3">
+                      <div
+                        style={{ backgroundColor: "rgb(248, 249, 250)" }}
+                        className="p-2 border border-2"
                       >
-                        123435
-                      </p>
-
-                      <div className="d-flex justify-content-between px-5 pt-4">
-                        <div>
-                          <p className="mb-0">Tuition fees</p>
-                          <p
-                            style={{
-                              backgroundColor: "#505470",
-                              color: "white",
-                              padding: "2px 10px",
-                              borderRadius: "5px",
-                              fontWeight: "500",
-                            }}
-                          >
-                            15,000.00 DHs
-                          </p>
-                        </div>
-                        <div>
-                          <p className="mb-0">Paid fees</p>
-                          <p
-                            style={{
-                              backgroundColor: "#24c18f",
-                              color: "white",
-                              padding: "2px 10px",
-                              borderRadius: "5px",
-                            }}
-                          >
-                            15,000.00 DHs
-                          </p>
+                        <img
+                          src={require("assets/img/payment/abir.png")}
+                          className="d-block mx-auto"
+                          style={{ width: "50px" }}
+                        />
+                        <p className="text-center mb-0">
+                          <small>
+                            <b>{students[index]}</b>
+                          </small>
+                        </p>
+                        <p className="text-center mb-0">
+                          <small>2 ème année master en XXXXX</small>
+                        </p>
+                        <hr className="mt-0 mb-0" />
+                        <p className="text-center mt-2 mb-0">
+                          <b>
+                            {new Date(payment.date).toLocaleString("en-GB")}
+                          </b>
+                        </p>
+                        <hr className="mt-0 mb-0" />
+                        <div className="d-flex justify-content-center flex-column align-items-center px-5 pt-4">
+                          <div>
+                            <p className="mb-0">Paid amount</p>
+                            <p
+                              style={{
+                                backgroundColor: "#505470",
+                                color: "white",
+                                padding: "2px 10px",
+                                borderRadius: "5px",
+                                fontWeight: "500",
+                              }}
+                            >
+                              {payment.montant} DHs
+                            </p>
+                          </div>
+                          <div>
+                            <Button
+                              style={{
+                                padding: "5px 40px",
+                              }}
+                              color="success"
+                              type="button"
+                            >
+                              Check
+                            </Button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Col>
-                  <Col lg="6" md="6" className="mb-3">
-                    <div
-                      style={{ backgroundColor: "rgb(248, 249, 250)" }}
-                      className="p-2 border border-2"
-                    >
-                      <img
-                        src={require("assets/img/payment/abir.png")}
-                        className="d-block mx-auto"
-                        style={{ width: "50px" }}
-                      />
-                      <p className="text-center mb-0">
-                        <small>
-                          <b>Abir Laaroussi</b>
-                        </small>
-                      </p>
-                      <p className="text-center mb-0">
-                        <small>2 ème année master en XXXXX</small>
-                      </p>
-                      <hr className="mt-0 mb-0" />
-                      <p className="text-center mt-2 mb-0">ID</p>
-                      <p
-                        style={{
-                          backgroundColor: "#dd9a63",
-                          width: "fit-content",
-                          padding: "2px 10px",
-                          borderRadius: "5px",
-                          color: "black",
-                          fontWeight: "500",
-                          margin: "0 auto",
-                        }}
-                      >
-                        123435
-                      </p>
-
-                      <div className="d-flex justify-content-between px-5 pt-4">
-                        <div>
-                          <p className="mb-0">Tuition fees</p>
-                          <p
-                            style={{
-                              backgroundColor: "#505470",
-                              color: "white",
-                              padding: "2px 10px",
-                              borderRadius: "5px",
-                              fontWeight: "500",
-                              fontWeight: "500",
-                            }}
-                          >
-                            15,000.00 DHs
-                          </p>
-                        </div>
-                        <div>
-                          <p className="mb-0">Paid fees</p>
-                          <p
-                            style={{
-                              backgroundColor: "#24c18f",
-                              color: "white",
-                              padding: "2px 10px",
-                              borderRadius: "5px",
-                              fontWeight: "500",
-                            }}
-                          >
-                            15,000.00 DHs
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col lg="6" md="6" className="mb-3">
-                    <div
-                      style={{ backgroundColor: "rgb(248, 249, 250)" }}
-                      className="p-2 border border-2"
-                    >
-                      <img
-                        src={require("assets/img/payment/abir.png")}
-                        className="d-block mx-auto"
-                        style={{ width: "50px" }}
-                      />
-                      <p className="text-center mb-0">
-                        <small>
-                          <b>Abir Laaroussi</b>
-                        </small>
-                      </p>
-                      <p className="text-center mb-0">
-                        <small>2 ème année master en XXXXX</small>
-                      </p>
-                      <hr className="mt-0 mb-0" />
-                      <p className="text-center mt-2 mb-0">ID</p>
-                      <p
-                        style={{
-                          backgroundColor: "#dd9a63",
-                          width: "fit-content",
-                          padding: "2px 10px",
-                          borderRadius: "5px",
-                          color: "black",
-                          fontWeight: "500",
-                          margin: "0 auto",
-                        }}
-                      >
-                        123435
-                      </p>
-
-                      <div className="d-flex justify-content-between px-5 pt-4">
-                        <div>
-                          <p className="mb-0">Tuition fees</p>
-                          <p
-                            style={{
-                              backgroundColor: "#505470",
-                              color: "white",
-                              padding: "2px 10px",
-                              borderRadius: "5px",
-                              fontWeight: "500",
-                            }}
-                          >
-                            15,000.00 DHs
-                          </p>
-                        </div>
-                        <div>
-                          <p className="mb-0">Paid fees</p>
-                          <p
-                            style={{
-                              backgroundColor: "#24c18f",
-                              color: "white",
-                              padding: "2px 10px",
-                              borderRadius: "5px",
-                              fontWeight: "500",
-                            }}
-                          >
-                            15,000.00 DHs
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col lg="6" md="6" className="mb-3">
-                    <div
-                      style={{ backgroundColor: "rgb(248, 249, 250)" }}
-                      className="p-2 border border-2"
-                    >
-                      <img
-                        src={require("assets/img/payment/abir.png")}
-                        className="d-block mx-auto"
-                        style={{ width: "50px" }}
-                      />
-                      <p className="text-center mb-0">
-                        <small>
-                          <b>Abir Laaroussi</b>
-                        </small>
-                      </p>
-                      <p className="text-center mb-0">
-                        <small>2 ème année master en XXXXX</small>
-                      </p>
-                      <hr className="mt-0 mb-0" />
-                      <p className="text-center mt-2 mb-0">ID</p>
-                      <p
-                        style={{
-                          backgroundColor: "#dd9a63",
-                          width: "fit-content",
-                          padding: "2px 10px",
-                          borderRadius: "5px",
-                          color: "black",
-                          fontWeight: "500",
-                          margin: "0 auto",
-                        }}
-                      >
-                        123435
-                      </p>
-
-                      <div className="d-flex justify-content-between px-5 pt-4">
-                        <div>
-                          <p className="mb-0">Tuition fees</p>
-                          <p
-                            style={{
-                              backgroundColor: "#505470",
-                              color: "white",
-                              padding: "2px 10px",
-                              borderRadius: "5px",
-                              fontWeight: "500",
-                            }}
-                          >
-                            15,000.00 DHs
-                          </p>
-                        </div>
-                        <div>
-                          <p className="mb-0">Paid fees</p>
-                          <p
-                            style={{
-                              backgroundColor: "#24c18f",
-                              color: "white",
-                              padding: "2px 10px",
-                              borderRadius: "5px",
-                              fontWeight: "500",
-                            }}
-                          >
-                            15,000.00 DHs
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col lg="6" md="6" className="mb-3">
-                    <div
-                      style={{ backgroundColor: "rgb(248, 249, 250)" }}
-                      className="p-2 border border-2"
-                    >
-                      <img
-                        src={require("assets/img/payment/abir.png")}
-                        className="d-block mx-auto"
-                        style={{ width: "50px" }}
-                      />
-                      <p className="text-center mb-0">
-                        <small>
-                          <b>Abir Laaroussi</b>
-                        </small>
-                      </p>
-                      <p className="text-center mb-0">
-                        <small>2 ème année master en XXXXX</small>
-                      </p>
-                      <hr className="mt-0 mb-0" />
-                      <p className="text-center mt-2 mb-0">ID</p>
-                      <p
-                        style={{
-                          backgroundColor: "#dd9a63",
-                          width: "fit-content",
-                          padding: "2px 10px",
-                          borderRadius: "5px",
-                          color: "black",
-                          fontWeight: "500",
-                          margin: "0 auto",
-                        }}
-                      >
-                        123435
-                      </p>
-
-                      <div className="d-flex justify-content-between px-5 pt-4">
-                        <div>
-                          <p className="mb-0">Tuition fees</p>
-                          <p
-                            style={{
-                              backgroundColor: "#505470",
-                              color: "white",
-                              padding: "2px 10px",
-                              borderRadius: "5px",
-                              fontWeight: "500",
-                            }}
-                          >
-                            15,000.00 DHs
-                          </p>
-                        </div>
-                        <div>
-                          <p className="mb-0">Paid fees</p>
-                          <p
-                            style={{
-                              backgroundColor: "#24c18f",
-                              color: "white",
-                              padding: "2px 10px",
-                              borderRadius: "5px",
-                              fontWeight: "500",
-                            }}
-                          >
-                            15,000.00 DHs
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col lg="6" md="6" className="mb-3">
-                    <div
-                      style={{ backgroundColor: "rgb(248, 249, 250)" }}
-                      className="p-2 border border-2"
-                    >
-                      <img
-                        src={require("assets/img/payment/abir.png")}
-                        className="d-block mx-auto"
-                        style={{ width: "50px" }}
-                      />
-                      <p className="text-center mb-0">
-                        <small>
-                          <b>Abir Laaroussi</b>
-                        </small>
-                      </p>
-                      <p className="text-center mb-0">
-                        <small>2 ème année master en XXXXX</small>
-                      </p>
-                      <hr className="mt-0 mb-0" />
-                      <p className="text-center mt-2 mb-0">ID</p>
-                      <p
-                        style={{
-                          backgroundColor: "#dd9a63",
-                          width: "fit-content",
-                          padding: "2px 10px",
-                          borderRadius: "5px",
-                          color: "black",
-                          fontWeight: "500",
-                          margin: "0 auto",
-                        }}
-                      >
-                        123435
-                      </p>
-
-                      <div className="d-flex justify-content-between px-5 pt-4">
-                        <div>
-                          <p className="mb-0">Tuition fees</p>
-                          <p
-                            style={{
-                              backgroundColor: "#505470",
-                              color: "white",
-                              padding: "2px 10px",
-                              borderRadius: "5px",
-                              fontWeight: "500",
-                            }}
-                          >
-                            15,000.00 DHs
-                          </p>
-                        </div>
-                        <div>
-                          <p className="mb-0">Paid fees</p>
-                          <p
-                            style={{
-                              backgroundColor: "#24c18f",
-                              color: "white",
-                              padding: "2px 10px",
-                              borderRadius: "5px",
-                              fontWeight: "500",
-                            }}
-                          >
-                            15,000.00 DHs
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </Col>
+                    </Col>
+                  ))}
 
                   <CardFooter className="py-4 ml-auto">
                     <nav aria-label="...">
@@ -530,4 +291,4 @@ const StudentData = () => {
   );
 };
 
-export default StudentData;
+export default TuitionFess;
